@@ -101,13 +101,16 @@ export const GlobalState: FC<GlobalStateProps> = ({ children }) => {
   const [newMessageFiles, setNewMessageFiles] = useState<ChatFile[]>([])
   const [newMessageImages, setNewMessageImages] = useState<MessageImage[]>([])
   const [showFilesDisplay, setShowFilesDisplay] = useState<boolean>(false)
+
+  // RETIEVAL STORE
   const [useRetrieval, setUseRetrieval] = useState<boolean>(true)
+  const [sourceCount, setSourceCount] = useState<number>(4)
 
   // THIS COMPONENT
   const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
-    if (window.location.hostname === "localhost") {
+    if (process.env.NEXT_PUBLIC_OLLAMA_URL) {
       fetchOllamaModels()
     }
 
@@ -338,13 +341,17 @@ export const GlobalState: FC<GlobalStateProps> = ({ children }) => {
         newMessageFiles,
         newMessageImages,
         showFilesDisplay,
-        useRetrieval,
         setChatFiles,
         setChatImages,
         setNewMessageFiles,
         setNewMessageImages,
         setShowFilesDisplay,
-        setUseRetrieval
+
+        // RETRIEVAL STORE
+        useRetrieval,
+        sourceCount,
+        setUseRetrieval,
+        setSourceCount
       }}
     >
       {children}

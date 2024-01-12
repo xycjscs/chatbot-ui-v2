@@ -1,7 +1,10 @@
+import { exportLocalStorageAsJSON } from "@/lib/export-old-data"
 import { ContentType } from "@/types"
 import {
   IconAdjustmentsHorizontal,
+  IconBooks,
   IconFile,
+  IconFileDownload,
   IconMessage,
   IconPencil
 } from "@tabler/icons-react"
@@ -47,12 +50,11 @@ export const SidebarSwitcher: FC<SidebarSwitcherProps> = ({
           onContentTypeChange={onContentTypeChange}
         />
 
-        {/* TODO */}
-        {/* <SidebarSwitchItem
+        <SidebarSwitchItem
           icon={<IconBooks size={SIDEBAR_ICON_SIZE} />}
           contentType="collections"
           onContentTypeChange={onContentTypeChange}
-        /> */}
+        />
 
         {/* TODO */}
         {/* <SidebarSwitchItem
@@ -68,6 +70,15 @@ export const SidebarSwitcher: FC<SidebarSwitcherProps> = ({
 
         {/* TODO */}
         {/* <Alerts /> */}
+
+        <WithTooltip
+          display={
+            <div>Download Chatbot UI 1.0 data as JSON. Import coming soon!</div>
+          }
+          trigger={
+            <IconFileDownload size={32} onClick={exportLocalStorageAsJSON} />
+          }
+        />
 
         <WithTooltip
           display={<div>Profile Settings</div>}

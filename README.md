@@ -8,13 +8,25 @@ The open-source AI chat app for everyone.
 
 View the latest demo [here](https://x.com/mckaywrigley/status/1738273242283151777?s=20).
 
+## Official Hosted Version
+
+Check back soon for an official hosted version of Chatbot UI.
+
 ## Support
 
 If you find Chatbot UI useful, please consider [sponsoring](https://github.com/sponsors/mckaywrigley) me to support my open-source work :)
 
+## Legacy Code
+
+Chatbot UI was recently updated to its 2.0 version.
+
+The code for 1.0 can be found on the `legacy` branch.
+
 ## Local Quickstart
 
 Follow these steps to get your own Chatbot UI instance running locally.
+
+You can watch the full video tutorial [here](https://www.youtube.com/watch?v=9Qq3-7-HNgw).
 
 ### 1. Clone the repo
 
@@ -50,8 +62,17 @@ You will need to install Docker to run Supabase locally. You can download it [he
 
 #### 2. Install Supabase CLI
 
+**MacOS/Linux**
+
 ```bash
 brew install supabase/tap/supabase
+```
+
+**Window**
+
+```bash
+scoop bucket add supabase https://github.com/supabase/scoop-bucket.git
+scoop install supabase
 ```
 
 #### 3. Start Supabase
@@ -105,9 +126,13 @@ npm run chat
 
 Your local instance of Chatbot UI should now be running at [http://localhost:3000](http://localhost:3000).
 
+You can view your backend GUI at [http://localhost:54323/project/default/editor](http://localhost:54323/project/default/editor).
+
 ## Hosted Quickstart
 
 Follow these steps to get your own Chatbot UI instance running in the cloud.
+
+Video tutorial coming soon.
 
 ### 1. Follow local quickstart
 
