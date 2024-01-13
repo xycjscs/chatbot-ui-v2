@@ -13,14 +13,14 @@ export async function POST(request: Request) {
   try {
     const profile = await getServerProfile()
 
-    checkApiKey(profile.mistral_api_key, "Mistral")
+    //checkApiKey(profile.mistral_api_key, "Mistral")
 
     const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${profile.mistral_api_key}`
+        Authorization: `Bearer ${process.env.MISTRAL_API_KEY}`
       },
       body: JSON.stringify({
         model: chatSettings.model,

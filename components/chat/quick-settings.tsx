@@ -151,9 +151,7 @@ export const QuickSettings: FC<QuickSettingsProps> = ({}) => {
           <div className="overflow-hidden text-ellipsis">
             {isModified && (selectedPreset || selectedAssistant) && "Modified "}
 
-            {selectedPreset?.name ||
-              selectedAssistant?.name ||
-              "Quick Settings"}
+            {selectedPreset?.name || selectedAssistant?.name || "预设"}
           </div>
 
           <IconChevronDown className="ml-1" />

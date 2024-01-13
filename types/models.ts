@@ -6,3 +6,4 @@ export type ModelProvider =
   | "llama"
   | "perplexity"
   | "ollama"
+  | "01-Ai"

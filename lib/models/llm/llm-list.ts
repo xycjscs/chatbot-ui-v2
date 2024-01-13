@@ -5,11 +5,14 @@ import { MISTRAL_LLM_LIST } from "./mistral-llm-list"
 import { OPENAI_LLM_LIST } from "./openai-llm-list"
 import { PERPLEXITY_LLM_LIST } from "./perplexity-llm-list"
 
+import { Yi_LLM_LIST } from "./Yi-llm-list"
+
 export const LLM_LIST: LLM[] = [
   ...OPENAI_LLM_LIST,
-  ...GOOGLE_LLM_LIST,
-  ...MISTRAL_LLM_LIST,
+  ...Yi_LLM_LIST,
+  //...GOOGLE_LLM_LIST,
+  ...MISTRAL_LLM_LIST
   // ...LLAMA_LLM_LIST,
-  ...PERPLEXITY_LLM_LIST,
-  ...ANTHROPIC_LLM_LIST
+  //...PERPLEXITY_LLM_LIST,
+  //...ANTHROPIC_LLM_LIST
 ]

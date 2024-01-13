@@ -17,7 +17,9 @@ export async function POST(request: Request) {
 
     const openai = new OpenAI({
       apiKey: profile.openai_api_key || "",
-      organization: profile.openai_organization_id
+      organization: profile.openai_organization_id,
+      baseURL:
+        "https://gateway.ai.cloudflare.com/v1/87869cf5e7ca1cbf68d6975feb07cb78/test/openai"
     })
 
     const response = await openai.chat.completions.create({

@@ -164,7 +164,7 @@ export const GlobalState: FC<GlobalStateProps> = ({ children }) => {
       setSelectedWorkspace(homeWorkspace!)
 
       setChatSettings({
-        model: (homeWorkspace?.default_model || "gpt-4-1106-preview") as LLMID,
+        model: (homeWorkspace?.default_model || "gpt-3.5-turbo-1106") as LLMID,
         prompt:
           homeWorkspace?.default_prompt ||
           "You are a friendly, helpful AI assistant.",
