@@ -106,6 +106,6 @@
 @media only screen and (max-width: 768px) and (orientation: portrait) {
   /* iPhone竖屏时的样式 */
   .content-container {
-      padding-bottom: 44pt;
+    margin-bottom: 44pt; /* 或者使用百分比 % */
   }
 }
