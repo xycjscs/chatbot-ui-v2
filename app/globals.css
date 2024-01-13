@@ -102,10 +102,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-@media only screen and (orientation: portrait) {
-  /* iPhone竖屏时的样式 */
-  .content-container {
-    margin-bottom: 44pt; /* 或者使用百分比 % */
-  }
-}

@@ -9,7 +9,8 @@ import { useEffect, useState } from "react"
 export default function HomePage() {
   const { theme } = useTheme()
 
-  const [stars, setStars] = useState(19000)
+  {
+    /*const [stars, setStars] = useState(19000)
 
   useEffect(() => {
     getGitHubRepoStars()
@@ -35,6 +36,7 @@ export default function HomePage() {
       console.error("Failed to fetch GitHub stars:", error)
       return 0
     }
+  }*/
   }
 
   return (
