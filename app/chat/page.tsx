@@ -4,13 +4,20 @@ import { ChatHelp } from "@/components/chat/chat-help"
 import { useChatHandler } from "@/components/chat/chat-hooks/use-chat-handler"
 import { ChatInput } from "@/components/chat/chat-input"
 import { ChatSettings } from "@/components/chat/chat-settings"
-import { ChatUI } from "@/components/chat/chat-ui"
+//import { ChatUI } from "@/components/chat/chat-ui"
 import { QuickSettings } from "@/components/chat/quick-settings"
 import { Brand } from "@/components/ui/brand"
 import { ChatbotUIContext } from "@/context/context"
 import useHotkey from "@/lib/hooks/use-hotkey"
 import { useTheme } from "next-themes"
 import { useContext } from "react"
+
+import React, { lazy, Suspense } from "react"
+const ChatUI = lazy(() =>
+  import("@/components/chat/chat-ui").then(module => ({
+    default: module.ChatUI
+  }))
+)
 
 export default function ChatPage() {
   useHotkey("o", () => handleNewChat())
@@ -48,7 +55,9 @@ export default function ChatPage() {
       </div>*/}
         </div>
       ) : (
-        <ChatUI />
+        <Suspense fallback={<div>Loading...</div>}>
+          <ChatUI />
+        </Suspense>
       )}
     </>
   )
