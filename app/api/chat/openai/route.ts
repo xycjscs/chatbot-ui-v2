@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     //checkApiKey(profile.openai_api_key, "OpenAI")
 
     const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
+      apiKey: profile.openai_api_key || process.env.OPENAI_API_KEY,
       baseURL: process.env.OPENAI_PROXY || "https://api.openai.com/v1"
     })
 

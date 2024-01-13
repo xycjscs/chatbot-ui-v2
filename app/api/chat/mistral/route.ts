@@ -20,7 +20,9 @@ export async function POST(request: Request) {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.MISTRAL_API_KEY}`
+        Authorization: `Bearer ${
+          profile.mistral_api_key || process.env.MISTRAL_API_KEY
+        }`
       },
       body: JSON.stringify({
         model: chatSettings.model,
