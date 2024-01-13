@@ -102,3 +102,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+  /* iPhone竖屏时的样式 */
+  .content-container {
+      padding-bottom: 44pt;
+  }
+}
