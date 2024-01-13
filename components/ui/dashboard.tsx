@@ -73,7 +73,7 @@ export const Dashboard: FC<DashboardProps> = ({ children }) => {
 
       <Button
         className={cn(
-          "absolute left-[4px] top-[50%] z-10 h-[32px] w-[32px] cursor-pointer"
+          "absolute left-[2px] top-[50%] z-10 h-[32px] w-[32px] cursor-pointer"
         )}
         style={{
           marginLeft: showSidebar ? `${SIDEBAR_WIDTH}px` : "0px",
@@ -83,7 +83,7 @@ export const Dashboard: FC<DashboardProps> = ({ children }) => {
         size="icon"
         onClick={handleToggleSidebar}
       >
-        <IconChevronCompactRight size={24} />
+        <IconChevronCompactRight size={24} color="rgb(20, 255, 36)" />
       </Button>
 
       <div
