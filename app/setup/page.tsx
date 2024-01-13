@@ -173,8 +173,9 @@ export default function SetupPage() {
           </StepContainer>
         )
 
-      // API Step
-      case 2:
+        // API Step
+        {
+          /*case 2:
         return (
           <StepContainer
             stepDescription="Enter API keys for each service you'd like to use."
@@ -211,10 +212,11 @@ export default function SetupPage() {
               onUseAzureOpenaiChange={setUseAzureOpenai}
             />
           </StepContainer>
-        )
+        )*/
+        }
 
       // Workspace Step
-      case 3:
+      case 2:
         return (
           <StepContainer
             stepDescription="Select the default settings for your home workspace."
@@ -234,7 +236,7 @@ export default function SetupPage() {
         )
 
       // Finish Step
-      case 4:
+      case 3:
         return (
           <StepContainer
             stepDescription="You are all set up!"
