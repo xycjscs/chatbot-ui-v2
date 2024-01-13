@@ -14,7 +14,7 @@ import { WithTooltip } from "../ui/with-tooltip"
 import { ProfileSettings } from "../utility/profile-settings"
 import { SidebarSwitchItem } from "./sidebar-switch-item"
 
-export const SIDEBAR_ICON_SIZE = 28
+export const SIDEBAR_ICON_SIZE = 24
 
 interface SidebarSwitcherProps {
   onContentTypeChange: (contentType: ContentType) => void
