@@ -53,7 +53,7 @@ export default function SetupPage() {
   // Workspace Step
   const [workspaceInstructions, setWorkspaceInstructions] = useState("")
   const [defaultChatSettings, setDefaultChatSettings] = useState<ChatSettings>({
-    model: "gpt-4-1106-preview",
+    model: "gpt-3.5-turbo-1106",
     prompt: "You are a friendly, helpful AI assistant.",
     temperature: 0.5,
     contextLength: 4096,
@@ -173,12 +173,11 @@ export default function SetupPage() {
           </StepContainer>
         )
 
-        // API Step
-        {
-          /*case 2:
+      // API Step
+      case 2:
         return (
           <StepContainer
-            stepDescription="Enter API keys for each service you'd like to use."
+            stepDescription="可直接跳过。"
             stepNum={currentStep}
             stepTitle="Set API Keys"
             onShouldProceed={handleShouldProceed}
@@ -212,11 +211,10 @@ export default function SetupPage() {
               onUseAzureOpenaiChange={setUseAzureOpenai}
             />
           </StepContainer>
-        )*/
-        }
+        )
 
       // Workspace Step
-      case 2:
+      case 3:
         return (
           <StepContainer
             stepDescription="Select the default settings for your home workspace."
@@ -236,7 +234,7 @@ export default function SetupPage() {
         )
 
       // Finish Step
-      case 3:
+      case 4:
         return (
           <StepContainer
             stepDescription="You are all set up!"

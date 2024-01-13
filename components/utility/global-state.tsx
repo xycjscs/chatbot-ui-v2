@@ -69,7 +69,7 @@ export const GlobalState: FC<GlobalStateProps> = ({ children }) => {
   const [userInput, setUserInput] = useState<string>("")
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([])
   const [chatSettings, setChatSettings] = useState<ChatSettings>({
-    model: "gpt-4-1106-preview",
+    model: "gpt-3.5-turbo-1106",
     prompt: "You are a helpful AI assistant.",
     temperature: 0.5,
     contextLength: 4000,
