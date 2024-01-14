@@ -15,6 +15,15 @@ export async function POST(request: Request) {
 
     //checkApiKey(profile.mistral_api_key, "Mistral")
 
+    // 定义要发送的数据
+    const requestData = {
+      model: chatSettings.model,
+      messages: messages,
+      temperature: chatSettings.temperature,
+      max_tokens: chatSettings.contextLength,
+      stream: true
+    }
+    console.log(requestData)
     const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -24,13 +33,7 @@ export async function POST(request: Request) {
           profile.mistral_api_key || process.env.MISTRAL_API_KEY
         }`
       },
-      body: JSON.stringify({
-        model: chatSettings.model,
-        messages: messages,
-        temperature: chatSettings.temperature,
-        max_tokens: chatSettings.contextLength,
-        stream: true
-      })
+      body: JSON.stringify(requestData)
     })
 
     const readableStream = new ReadableStream({
