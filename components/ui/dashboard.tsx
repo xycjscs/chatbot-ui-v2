@@ -83,7 +83,7 @@ export const Dashboard: FC<DashboardProps> = ({ children }) => {
         size="icon"
         onClick={handleToggleSidebar}
       >
-        <IconChevronCompactRight size={24} color="rgb(20, 255, 36)" />
+        <IconChevronCompactRight size={30} color="rgb(20, 255, 36)" />
       </Button>
 
       <div

@@ -56,5 +56,6 @@ export const providerToKeyMap = {
   perplexity: VALID_KEYS.PERPLEXITY_API_KEY,
   // Note: Azure OpenAI uses the same key as OpenAI
   llama: false,
-  ollama: false
+  ollama: false,
+  "01-Ai": VALID_KEYS.Yi_API_KEY
 }
