@@ -28,6 +28,7 @@ export async function POST(request: Request) {
         model: chatSettings.model,
         messages: messages,
         temperature: chatSettings.temperature,
+        max_tokens: chatSettings.contextLength,
         stream: true
       })
     })
@@ -47,6 +48,11 @@ export async function POST(request: Request) {
             break
           }
           const chunk = new TextDecoder("utf-8").decode(value)
+          //debug the end of msitral
+          if (chunk.includes("data: [DONE]")) {
+            controller.close()
+            break
+          }
           const dataParts = chunk.split("data: ")
           const data =
             isFirstChunk && dataParts[2] ? dataParts[2] : dataParts[1]
