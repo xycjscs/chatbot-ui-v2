@@ -17,7 +17,7 @@ const MISTRAL_7B: LLM = {
 // Mixtral (UPDATED 12/21/23)
 const MIXTRAL: LLM = {
   modelId: "mistral-small",
-  modelName: "Mixtral 8x7B",
+  modelName: "Mixtral > GPT-3.5",
   provider: "mistral",
   hostedId: "mistral-small",
   platformLink: MISTRAL_PLATORM_LINK,
@@ -27,12 +27,12 @@ const MIXTRAL: LLM = {
 // Mistral Medium (UPDATED 12/21/23)
 const MISTRAL_MEDIUM: LLM = {
   modelId: "mistral-medium",
-  modelName: "Mistral Medium",
+  modelName: "Mistral = GPT-4",
   provider: "mistral",
   hostedId: "mistral-medium",
   platformLink: MISTRAL_PLATORM_LINK,
   imageInput: false
 }
 
-export const MISTRAL_LLM_LIST: LLM[] = [MISTRAL_7B, MIXTRAL, MISTRAL_MEDIUM]
-//export const MISTRAL_LLM_LIST: LLM[] = [MISTRAL_7B, MIXTRAL]
+export const MISTRAL_LLM_LIST: LLM[] = [MISTRAL_MEDIUM, MIXTRAL]
+//export const MISTRAL_LLM_LIST: LLM[] = [MISTRAL_7B, MIXTRAL, MISTRAL_MEDIUM]
