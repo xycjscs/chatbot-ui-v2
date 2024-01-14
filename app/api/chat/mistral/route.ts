@@ -43,11 +43,13 @@ export async function POST(request: Request) {
         let isFirstChunk = true
         while (true) {
           const { done, value } = await reader.read()
+          console.log(value)
           if (done) {
             controller.close()
             break
           }
           const chunk = new TextDecoder("utf-8").decode(value)
+          console.log(chunk)
           //debug the end of msitral
           if (chunk.includes("data: [DONE]")) {
             controller.close()
