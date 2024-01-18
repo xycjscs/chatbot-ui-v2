@@ -7,6 +7,7 @@ export type LLMID =
   | MistralLLMID
   | PerplexityLLMID
   | YiLLMID
+  | DeepseekLLMID
 
 // OpenAI Models (UPDATED 12/18/23)
 export type OpenAILLMID =
@@ -37,6 +38,11 @@ export type PerplexityLLMID =
 
 // Yi Models
 export type YiLLMID = "yi-34b-chat" // Yi 34B
+
+// deepseek Models
+export type DeepseekLLMID =
+  | "deepseek-coder" // deepseek-coder
+  | "deepseek-chat" // deepseek-coder
 
 export interface LLM {
   modelId: LLMID

@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils"
 import meta from "@/public/providers/meta.png"
 import mistral from "@/public/providers/mistral.png"
+import deepseek from "@/public/providers/deepseek.webp"
+import ai01 from "@/public/providers/01ai.png"
 import perplexity from "@/public/providers/perplexity.png"
 import { LLMID } from "@/types"
 import { IconSparkles } from "@tabler/icons-react"
@@ -135,6 +137,32 @@ export const ModelIcon: FC<ModelIconProps> = ({
             )}
             src={mistral.src}
             alt="Mistral"
+            width={width}
+            height={height}
+          />
+        )
+      } else if (modelId.includes("deepseek")) {
+        return (
+          <Image
+            className={cn(
+              "rounded-sm p-1",
+              theme === "dark" ? "bg-white" : "border-[1px] border-black"
+            )}
+            src={deepseek.src}
+            alt="Deepseek"
+            width={width}
+            height={height}
+          />
+        )
+      } else if (modelId.includes("yi")) {
+        return (
+          <Image
+            className={cn(
+              "rounded-sm p-1",
+              theme === "dark" ? "bg-white" : "border-[1px] border-black"
+            )}
+            src={ai01.src}
+            alt="01-Ai"
             width={width}
             height={height}
           />

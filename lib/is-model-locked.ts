@@ -57,5 +57,6 @@ export const providerToKeyMap = {
   // Note: Azure OpenAI uses the same key as OpenAI
   llama: false,
   ollama: false,
-  "01-Ai": VALID_KEYS.Yi_API_KEY
+  "01-Ai": VALID_KEYS.Yi_API_KEY,
+  deepseek: VALID_KEYS.DEEPSEEK_API_KEY
 }

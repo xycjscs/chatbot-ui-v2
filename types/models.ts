@@ -7,3 +7,4 @@ export type ModelProvider =
   | "perplexity"
   | "ollama"
   | "01-Ai"
+  | "deepseek"
