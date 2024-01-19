@@ -52,3 +52,7 @@ export interface LLM {
   platformLink: string
   imageInput: boolean
 }
+
+export interface OpenRouterLLM extends LLM {
+  maxContext: number
+}

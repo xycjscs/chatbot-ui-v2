@@ -42,3 +42,4 @@ seed.sql
 scratch.txt
 
 /app/api/chat/mistral/route-fetch.ts
+tool-schemas

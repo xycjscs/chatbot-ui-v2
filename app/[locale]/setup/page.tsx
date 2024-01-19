@@ -9,14 +9,14 @@ import { TablesUpdate } from "@/supabase/types"
 import { ChatSettings } from "@/types"
 import { useRouter } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
-import { APIStep } from "../../components/setup/api-step"
-import { FinishStep } from "../../components/setup/finish-step"
-import { ProfileStep } from "../../components/setup/profile-step"
+import { APIStep } from "../../../components/setup/api-step"
+import { FinishStep } from "../../../components/setup/finish-step"
+import { ProfileStep } from "../../../components/setup/profile-step"
 import {
   SETUP_STEP_COUNT,
   StepContainer
-} from "../../components/setup/step-container"
-import { WorkspaceStep } from "../../components/setup/workspace-step"
+} from "../../../components/setup/step-container"
+import { WorkspaceStep } from "../../../components/setup/workspace-step"
 
 export default function SetupPage() {
   const { profile, setProfile, setSelectedWorkspace, setWorkspaces } =
@@ -49,6 +49,7 @@ export default function SetupPage() {
   const [googleGeminiAPIKey, setGoogleGeminiAPIKey] = useState("")
   const [mistralAPIKey, setMistralAPIKey] = useState("")
   const [perplexityAPIKey, setPerplexityAPIKey] = useState("")
+  const [openrouterAPIKey, setOpenrouterAPIKey] = useState("")
 
   // Workspace Step
   const [workspaceInstructions, setWorkspaceInstructions] = useState("")
@@ -100,6 +101,7 @@ export default function SetupPage() {
       google_gemini_api_key: googleGeminiAPIKey,
       mistral_api_key: mistralAPIKey,
       perplexity_api_key: perplexityAPIKey,
+      openrouter_api_key: openrouterAPIKey,
       use_azure_openai: useAzureOpenai,
       azure_openai_api_key: azureOpenaiAPIKey,
       azure_openai_endpoint: azureOpenaiEndpoint,
@@ -209,6 +211,8 @@ export default function SetupPage() {
               onMistralAPIKeyChange={setMistralAPIKey}
               onPerplexityAPIKeyChange={setPerplexityAPIKey}
               onUseAzureOpenaiChange={setUseAzureOpenai}
+              openrouterAPIKey={openrouterAPIKey}
+              onOpenrouterAPIKeyChange={setOpenrouterAPIKey}
             />
           </StepContainer>
         )
@@ -263,6 +267,7 @@ export default function SetupPage() {
 
         const profile = await getProfileByUserId(user.id)
         setProfile(profile)
+        setUsername(profile.username)
 
         if (!profile.has_onboarded) {
           setLoading(false)
