@@ -34,5 +34,5 @@ const MISTRAL_MEDIUM: LLM = {
   imageInput: false
 }
 
-export const MISTRAL_LLM_LIST: LLM[] = [MISTRAL_MEDIUM, MIXTRAL]
+export const MISTRAL_LLM_LIST: LLM[] = [MISTRAL_MEDIUM]
 //export const MISTRAL_LLM_LIST: LLM[] = [MISTRAL_7B, MIXTRAL, MISTRAL_MEDIUM]
