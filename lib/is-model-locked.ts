@@ -61,8 +61,7 @@ export const providerToKeyMap = {
   anthropic: VALID_KEYS.ANTHROPIC_API_KEY,
   mistral: VALID_KEYS.MISTRAL_API_KEY,
   perplexity: VALID_KEYS.PERPLEXITY_API_KEY,
-  // Note: Azure OpenAI uses the same key as OpenAI
-  llama: false,
+  openrouter: VALID_KEYS.OPENROUTER_API_KEY,
   ollama: false,
   "01-Ai": VALID_KEYS.Yi_API_KEY,
   deepseek: VALID_KEYS.DEEPSEEK_API_KEY
