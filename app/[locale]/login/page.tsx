@@ -70,7 +70,7 @@ export default async function Login({
       options: {
         // TODO: USE IF YOU WANT TO SEND EMAIL VERIFICATION, ALSO CHANGE TOML FILE
         //emailRedirectTo: `${origin}/auth/callback`
-        //emailRedirectTo: `${origin}/login`
+        emailRedirectTo: `${origin}/login`
       }
     })
 
