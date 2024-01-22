@@ -119,8 +119,8 @@ export const Message: FC<MessageProps> = ({
 
   const MODEL_DATA = [
     ...LLM_LIST,
-    ...availableLocalModels,
-    ...availableOpenRouterModels
+    ...availableLocalModels
+    //...availableOpenRouterModels
   ].find(llm => llm.modelId === message.model) as LLM
 
   const selectedAssistantImage = assistantImages.find(

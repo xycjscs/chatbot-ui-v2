@@ -73,8 +73,8 @@ export const ModelSelect: FC<ModelSelectProps> = ({
 
   const ALL_MODELS = [
     ...hostedModelOptions,
-    ...localModelOptions,
-    ...availableOpenRouterModels
+    ...localModelOptions
+    //...availableOpenRouterModels
   ]
 
   const groupedModels = ALL_MODELS.reduce<Record<string, LLM[]>>(
