@@ -61,6 +61,29 @@ export default async function Login({
 
     const email = formData.get("email") as string
     const password = formData.get("password") as string
+
+    if (process.env.EMAIL_DOMAIN_WHITELIST) {
+      const emailDomainWhitelist =
+        process.env.EMAIL_DOMAIN_WHITELIST?.split(",") ?? []
+      if (
+        emailDomainWhitelist.length > 0 &&
+        !emailDomainWhitelist.includes(email.split("@")[1])
+      ) {
+        return redirect(
+          `/login?message=Email ${email} is not allowed to sign up.`
+        )
+      }
+    }
+
+    if (process.env.EMAIL_WHITELIST) {
+      const emailWhitelist = process.env.EMAIL_WHITELIST?.split(",") ?? []
+      if (emailWhitelist.length > 0 && !emailWhitelist.includes(email)) {
+        return redirect(
+          `/login?message=Email ${email} is not allowed to sign up.`
+        )
+      }
+    }
+
     const cookieStore = cookies()
     const supabase = createClient(cookieStore)
 
@@ -70,7 +93,7 @@ export default async function Login({
       options: {
         // TODO: USE IF YOU WANT TO SEND EMAIL VERIFICATION, ALSO CHANGE TOML FILE
         //emailRedirectTo: `${origin}/auth/callback`
-        emailRedirectTo: `${origin}/login`
+        //emailRedirectTo: `${origin}/login`
       }
     })
 
