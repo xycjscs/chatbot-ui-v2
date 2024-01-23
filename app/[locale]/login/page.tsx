@@ -189,6 +189,12 @@ export default async function Login({
           </button>
         </div>
 
+        {searchParams?.message && (
+          <p className="bg-foreground/10 text-foreground mt-4 p-4 text-center">
+            {searchParams.message}
+          </p>
+        )}
+
         {/* 插入图片 */}
         <div className="flex justify-center py-3">
           <p>扫码获得教程和支持</p>
@@ -201,12 +207,6 @@ export default async function Login({
             height={200} // 图片高度
           />
         </div>
-
-        {searchParams?.message && (
-          <p className="bg-foreground/10 text-foreground mt-4 p-4 text-center">
-            {searchParams.message}
-          </p>
-        )}
       </form>
     </div>
   )
