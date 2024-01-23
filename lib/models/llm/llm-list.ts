@@ -9,10 +9,10 @@ import { Yi_LLM_LIST } from "./Yi-llm-list"
 import { Deepseek_LLM_LIST } from "./deepseek-llm-list"
 
 export const LLM_LIST: LLM[] = [
+  ...OPENAI_LLM_LIST,
   ...MISTRAL_LLM_LIST,
   ...Deepseek_LLM_LIST,
-  ...Yi_LLM_LIST,
-  ...OPENAI_LLM_LIST
+  ...Yi_LLM_LIST
 
   //...GOOGLE_LLM_LIST,
   // ...LLAMA_LLM_LIST,
