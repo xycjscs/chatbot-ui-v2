@@ -11,6 +11,7 @@ import { ChatbotUIContext } from "@/context/context"
 import useHotkey from "@/lib/hooks/use-hotkey"
 import { useTheme } from "next-themes"
 import { useContext } from "react"
+import Image from "next/image"
 
 import React, { lazy, Suspense } from "react"
 const ChatUI = lazy(() =>
@@ -34,6 +35,15 @@ export default function ChatPage() {
         <div className="relative flex h-full flex-col items-center justify-center">
           <div className="top-50% left-50% -translate-x-50% -translate-y-50% absolute mb-20">
             <Brand theme={theme === "dark" ? "dark" : "light"} />
+            {/* 插入图片 */}
+            <div className="flex justify-center">
+              <Image
+                src="/wechat-mini.jpg" // 图片路径
+                alt="WeChat" // 图片描述
+                width={100} // 图片宽度
+                height={100} // 图片高度
+              />
+            </div>
           </div>
 
           <div className="absolute left-2 top-2">

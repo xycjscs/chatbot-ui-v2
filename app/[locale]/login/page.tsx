@@ -9,6 +9,7 @@ import { Metadata } from "next"
 import { cookies, headers } from "next/headers"
 import { redirect } from "next/navigation"
 import { get } from "@vercel/edge-config"
+import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "Login"
@@ -186,6 +187,19 @@ export default async function Login({
           >
             Reset
           </button>
+        </div>
+
+        {/* 插入图片 */}
+        <div className="flex justify-center py-3">
+          <p>扫码获得教程和支持</p>
+        </div>
+        <div className="flex justify-center">
+          <Image
+            src="/wechat.jpg" // 图片路径
+            alt="WeChat" // 图片描述
+            width={200} // 图片宽度
+            height={200} // 图片高度
+          />
         </div>
 
         {searchParams?.message && (
