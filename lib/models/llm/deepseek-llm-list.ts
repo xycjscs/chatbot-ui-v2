@@ -7,7 +7,7 @@ const Deepseek_PLATORM_LINK = "https://platform.deepseek.com/docs"
 // deepseek-coder (UPDATED 01/13/24)
 const Deepseek_coder: LLM = {
   modelId: "deepseek-coder",
-  modelName: "Deepseek coder",
+  modelName: "Deepseek 自动编程",
   provider: "deepseek",
   hostedId: "deepseek-coder",
   platformLink: Deepseek_PLATORM_LINK,
