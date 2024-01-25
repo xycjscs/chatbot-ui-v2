@@ -211,7 +211,7 @@ export const ChatUI: FC<ChatUIProps> = ({}) => {
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="relative w-full items-end px-10 pb-8 pt-5">
+      <div className="relative w-full items-end px-2 pb-8 pt-5">
         <ChatInput />
       </div>
 
