@@ -43,8 +43,8 @@ export const ChatItem: FC<ChatItemProps> = ({ chat }) => {
 
   const MODEL_DATA = [
     ...LLM_LIST,
-    ...availableLocalModels
-    //...availableOpenRouterModels
+    ...availableLocalModels,
+    ...availableOpenRouterModels
   ].find(llm => llm.modelId === chat.model) as LLM
 
   const assistantImage = assistantImages.find(

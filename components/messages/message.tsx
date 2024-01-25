@@ -129,8 +129,8 @@ export const Message: FC<MessageProps> = ({
 
   const MODEL_DATA = [
     ...LLM_LIST,
-    ...availableLocalModels
-    //...availableOpenRouterModels
+    ...availableLocalModels,
+    ...availableOpenRouterModels
   ].find(llm => llm.modelId === message.model) as LLM
 
   const selectedAssistantImage = assistantImages.find(
@@ -147,8 +147,8 @@ export const Message: FC<MessageProps> = ({
       onMouseLeave={() => setIsHovering(false)}
       onKeyDown={handleKeyDown}
     >
-      <div className="relative flex w-[300px] flex-col py-6 sm:w-[400px] md:w-[500px] lg:w-[600px] xl:w-[700px]">
-        <div className="absolute right-0 top-7">
+      <div className="relative flex w-full flex-col px-10 py-6">
+        <div className="absolute right-10 top-7">
           <MessageActions
             onCopy={handleCopy}
             onEdit={handleStartEdit}
