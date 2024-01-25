@@ -77,7 +77,8 @@ export async function POST(req: Request) {
     } else {
       openai = new OpenAI({
         apiKey: profile.openai_api_key || "",
-        organization: profile.openai_organization_id
+        organization: profile.openai_organization_id,
+        baseURL: process.env.OPENAI_PROXY || "https://api.openai.com/v1"
       })
     }
 
