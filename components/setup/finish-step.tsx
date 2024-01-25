@@ -8,8 +8,8 @@ export const FinishStep: FC<FinishStepProps> = ({ displayName }) => {
   return (
     <div className="space-y-4">
       <div>
-        Welcome to Molecular Imaging Machine Learning,{" "}
-        {displayName.split(" ")[0]}!
+        Welcome to Molecular Imaging Machine Learning
+        {displayName.length > 0 ? `, ${displayName.split(" ")[0]}` : null}!
       </div>
 
       <div>Click next to start chatting.</div>

@@ -162,7 +162,7 @@ export const ModelIcon: FC<ModelIconProps> = ({
               theme === "dark" ? "bg-white" : "border-[1px] border-black"
             )}
             src={ai01.src}
-            alt="01-Ai"
+            alt="yi"
             width={width}
             height={height}
           />

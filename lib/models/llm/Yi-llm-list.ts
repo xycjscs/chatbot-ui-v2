@@ -8,7 +8,7 @@ const Yi_PLATORM_LINK = "https://www.lingyiwanwu.com"
 const Yi_34B: LLM = {
   modelId: "yi-34b-chat",
   modelName: "Yi 34B 中国专家 [zh]",
-  provider: "01-Ai",
+  provider: "yi",
   hostedId: "yi-34b-chat",
   platformLink: Yi_PLATORM_LINK,
   imageInput: false

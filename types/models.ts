@@ -5,6 +5,6 @@ export type ModelProvider =
   | "mistral"
   | "perplexity"
   | "ollama"
-  | "01-Ai"
+  | "yi"
   | "deepseek"
   | "openrouter"
