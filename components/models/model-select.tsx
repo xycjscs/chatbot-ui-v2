@@ -159,7 +159,7 @@ export const ModelSelect: FC<ModelSelectProps> = ({
           onChange={e => setSearch(e.target.value)}
         />
 
-        <div className="max-h-[300px] overflow-auto">
+        <div className="max-h-[500px] overflow-auto">
           {Object.entries(groupedModels).map(([provider, models]) => {
             const filteredModels = models
               .filter(model => {
