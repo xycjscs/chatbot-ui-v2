@@ -34,5 +34,15 @@ const GPT3_5Turbo: LLM = {
   imageInput: false
 }
 
+// GPT-3.5 Turbo (UPDATED 12/18/23)
+const GPT3_5Turbo_0613: LLM = {
+  modelId: "gpt-3.5-turbo-0613",
+  modelName: "GPT-3.5 Turbo Smart",
+  provider: "openai",
+  hostedId: "gpt-3.5-turbo-0613",
+  platformLink: OPENAI_PLATORM_LINK,
+  imageInput: false
+}
+
 //export const OPENAI_LLM_LIST: LLM[] = [GPT3_5Turbo, GPT4Turbo, GPT4Vision]
-export const OPENAI_LLM_LIST: LLM[] = [GPT3_5Turbo]
+export const OPENAI_LLM_LIST: LLM[] = [GPT3_5Turbo_0613, GPT3_5Turbo]

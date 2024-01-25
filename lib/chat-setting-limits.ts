@@ -59,6 +59,12 @@ export const CHAT_SETTING_LIMITS: Record<LLMID, ChatSettingLimits> = {
   // OLLAMA MODELS
 
   // OPENAI MODELS
+  "gpt-3.5-turbo-0613": {
+    MIN_TEMPERATURE: 0.0,
+    MAX_TEMPERATURE: 2.0,
+    MAX_TOKEN_OUTPUT_LENGTH: 1024,
+    MAX_CONTEXT_LENGTH: 4096
+  },
   "gpt-3.5-turbo-1106": {
     MIN_TEMPERATURE: 0.0,
     MAX_TEMPERATURE: 2.0,
