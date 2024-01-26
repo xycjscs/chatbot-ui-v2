@@ -5,8 +5,8 @@ SET default_model = 'gpt-4-turbo-preview'
 WHERE default_model = 'gpt-4-1106-preview';
 
 UPDATE workspaces
-SET default_model = 'gpt-3.5-turbo'
-WHERE default_model = 'gpt-3.5-turbo-1106';
+SET default_model = 'gpt-3.5-turbo-1106'
+WHERE default_model = 'gpt-3.5-turbo';
 
 -- PRESETS
 
@@ -15,8 +15,8 @@ SET model = 'gpt-4-turbo-preview'
 WHERE model = 'gpt-4-1106-preview';
 
 UPDATE presets
-SET model = 'gpt-3.5-turbo'
-WHERE model = 'gpt-3.5-turbo-1106';
+SET model = 'gpt-3.5-turbo-1106'
+WHERE model = 'gpt-3.5-turbo';
 
 -- ASSISTANTS
 
@@ -25,8 +25,8 @@ SET model = 'gpt-4-turbo-preview'
 WHERE model = 'gpt-4-1106-preview';
 
 UPDATE assistants
-SET model = 'gpt-3.5-turbo'
-WHERE model = 'gpt-3.5-turbo-1106';
+SET model = 'gpt-3.5-turbo-1106'
+WHERE model = 'gpt-3.5-turbo';
 
 -- CHATS
 
@@ -35,8 +35,8 @@ SET model = 'gpt-4-turbo-preview'
 WHERE model = 'gpt-4-1106-preview';
 
 UPDATE chats
-SET model = 'gpt-3.5-turbo'
-WHERE model = 'gpt-3.5-turbo-1106';
+SET model = 'gpt-3.5-turbo-1106'
+WHERE model = 'gpt-3.5-turbo';
 
 -- MESSAGES
 
@@ -45,8 +45,8 @@ SET model = 'gpt-4-turbo-preview'
 WHERE model = 'gpt-4-1106-preview';
 
 UPDATE messages
-SET model = 'gpt-3.5-turbo'
-WHERE model = 'gpt-3.5-turbo-1106';
+SET model = 'gpt-3.5-turbo-1106'
+WHERE model = 'gpt-3.5-turbo';
 
 -- PROFILES
 
@@ -93,7 +93,7 @@ BEGIN
         TRUE,
         'Home',
         4096,
-        'gpt-4-turbo-preview', -- Updated default model
+        'gpt-3.5-turbo-1106', -- Updated default model
         'You are a friendly, helpful AI assistant.',
         0.5,
         'My home workspace.',

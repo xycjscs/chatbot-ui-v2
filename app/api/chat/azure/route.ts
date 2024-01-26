@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 
     let DEPLOYMENT_ID = ""
     switch (chatSettings.model) {
-      case "gpt-3.5-turbo":
+      case "gpt-3.5-turbo-1106":
         DEPLOYMENT_ID = profile.azure_openai_35_turbo_id || ""
         break
       case "gpt-4-turbo-preview":
