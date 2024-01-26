@@ -152,7 +152,7 @@ export default function SetupPage() {
       case 2:
         return (
           <StepContainer
-            stepDescription="Enter API keys for each service you'd like to use."
+            stepDescription="可直接跳过。"
             stepNum={currentStep}
             stepTitle="Set API Keys (optional)"
             onShouldProceed={handleShouldProceed}
