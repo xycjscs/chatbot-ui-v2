@@ -8,3 +8,4 @@ export type ModelProvider =
   | "yi"
   | "deepseek"
   | "openrouter"
+  | "custom"
