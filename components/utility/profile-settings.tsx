@@ -693,7 +693,7 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
                   <>
                     <Label>70+大模型超大杯 API Key</Label>
                     <Input
-                      placeholder="OpenRouter API Key"
+                      placeholder="大模型超大杯 API Key"
                       type="password"
                       value={openrouterAPIKey}
                       onChange={e => setOpenrouterAPIKey(e.target.value)}
