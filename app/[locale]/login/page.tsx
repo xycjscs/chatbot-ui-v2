@@ -55,7 +55,7 @@ export default async function Login({
       return redirect(`/login?message=${error.message}`)
     }
 
-    return redirect("/chat")
+    return redirect("/setup")
   }
 
   const signUp = async (formData: FormData) => {
