@@ -597,7 +597,7 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
                   </>
                 ) : (
                   <>
-                    <div className="space-y-1">
+                    {/* <div className="space-y-1">
                       {envKeyMap["openai_organization_id"] ? (
                         <Label className="text-xs">
                           OpenAI Organization ID set by admin.
@@ -617,12 +617,12 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
                           />
                         </>
                       )}
-                    </div>
+                          </div>*/}
                   </>
                 )}
               </div>
 
-              <div className="space-y-1">
+              {/*<div className="space-y-1">
                 {envKeyMap["anthropic"] ? (
                   <Label>Anthropic API key set by admin.</Label>
                 ) : (
@@ -636,9 +636,9 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
                     />
                   </>
                 )}
-              </div>
+                </div>*/}
 
-              <div className="space-y-1">
+              {/*<div className="space-y-1">
                 {envKeyMap["google"] ? (
                   <Label>Google Gemini API key set by admin.</Label>
                 ) : (
@@ -652,7 +652,7 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
                     />
                   </>
                 )}
-              </div>
+                </div>*/}
 
               <div className="space-y-1">
                 {envKeyMap["mistral"] ? (
@@ -670,7 +670,7 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
                 )}
               </div>
 
-              <div className="space-y-1">
+              {/*<div className="space-y-1">
                 {envKeyMap["perplexity"] ? (
                   <Label>Perplexity API key set by admin.</Label>
                 ) : (
@@ -684,14 +684,14 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
                     />
                   </>
                 )}
-              </div>
+                </div>*/}
 
               <div className="space-y-1">
                 {envKeyMap["openrouter"] ? (
                   <Label>OpenRouter API key set by admin.</Label>
                 ) : (
                   <>
-                    <Label>OpenRouter API Key</Label>
+                    <Label>70+大模型超大杯 API Key</Label>
                     <Input
                       placeholder="OpenRouter API Key"
                       type="password"
