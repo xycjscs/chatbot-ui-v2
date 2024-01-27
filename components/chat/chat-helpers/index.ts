@@ -301,6 +301,7 @@ export const processResponse = async (
           contentToAdd = isHosted ? chunk : JSON.parse(chunk).message.content
           fullText += contentToAdd
           fullText += "1"
+          contentToAdd += "1"
         } catch (error) {
           console.error("Error parsing JSON:", error)
         }
