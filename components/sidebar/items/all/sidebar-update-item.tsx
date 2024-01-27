@@ -611,7 +611,7 @@ export const SidebarUpdateItem: FC<SidebarUpdateItemProps> = ({
         side="left"
         onKeyDown={handleKeyDown}
       >
-        <div className="grow">
+        <div className="grow overflow-auto">
           <SheetHeader>
             <SheetTitle className="text-2xl font-bold">
               Edit {contentType.slice(0, -1)}
