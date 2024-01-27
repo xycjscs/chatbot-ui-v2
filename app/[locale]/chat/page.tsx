@@ -36,14 +36,14 @@ export default function ChatPage() {
           <div className="top-50% left-50% -translate-x-50% -translate-y-50% absolute mb-20">
             <Brand theme={theme === "dark" ? "dark" : "light"} />
             {/* 插入图片 */}
-            <div className="flex justify-center">
+            {/*<div className="flex justify-center">
               <Image
                 src="/wechat-mini.jpg" // 图片路径
                 alt="WeChat" // 图片描述
                 width={100} // 图片宽度
                 height={100} // 图片高度
               />
-            </div>
+      </div>*/}
           </div>
 
           <div className="absolute left-2 top-2">
