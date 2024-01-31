@@ -63,11 +63,18 @@ export const CHAT_SETTING_LIMITS: Record<LLMID, ChatSettingLimits> = {
     MAX_TOKEN_OUTPUT_LENGTH: 1024,
     MAX_CONTEXT_LENGTH: 4096
   },
+  "gpt-3.5-turbo": {
+    MIN_TEMPERATURE: 0.0,
+    MAX_TEMPERATURE: 2.0,
+    MAX_TOKEN_OUTPUT_LENGTH: 1024,
+    MAX_CONTEXT_LENGTH: 4096
+  },
   "gpt-3.5-turbo-1106": {
     MIN_TEMPERATURE: 0.0,
     MAX_TEMPERATURE: 2.0,
     MAX_TOKEN_OUTPUT_LENGTH: 4096,
-    MAX_CONTEXT_LENGTH: 16385
+    MAX_CONTEXT_LENGTH: 4096
+    // MAX_CONTEXT_LENGTH: 16385 (TODO: Change this back to 16385 when OpenAI bumps the model)
   },
   "gpt-4-turbo-preview": {
     MIN_TEMPERATURE: 0.0,
@@ -82,6 +89,12 @@ export const CHAT_SETTING_LIMITS: Record<LLMID, ChatSettingLimits> = {
     //MAX_CONTEXT_LENGTH: 128000
     MAX_TOKEN_OUTPUT_LENGTH: 500,
     MAX_CONTEXT_LENGTH: 100
+  },
+  "gpt-4": {
+    MIN_TEMPERATURE: 0.0,
+    MAX_TEMPERATURE: 2.0,
+    MAX_TOKEN_OUTPUT_LENGTH: 4096,
+    MAX_CONTEXT_LENGTH: 8192
   },
 
   // PERPLEXITY MODELS
