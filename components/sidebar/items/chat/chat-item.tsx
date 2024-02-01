@@ -87,7 +87,7 @@ export const ChatItem: FC<ChatItemProps> = ({ chat }) => {
         />
       )}
 
-      <div className="ml-3 flex-1 truncate text-sm font-semibold">
+      <div className="ml-3 line-clamp-2 flex-1 overflow-hidden text-sm font-semibold">
         {chat.name}
       </div>
 
