@@ -4,7 +4,7 @@ import deepseek from "@/public/providers/deepseek.webp"
 import ai01 from "@/public/providers/01ai.png"
 import meta from "@/public/providers/meta.png"
 import perplexity from "@/public/providers/perplexity.png"
-import { LLMID } from "@/types"
+import { ModelProvider } from "@/types"
 import { IconSparkles } from "@tabler/icons-react"
 import { useTheme } from "next-themes"
 import Image from "next/image"
@@ -14,24 +14,21 @@ import { GoogleSVG } from "../icons/google-svg"
 import { OpenAISVG } from "../icons/openai-svg"
 
 interface ModelIconProps extends HTMLAttributes<HTMLDivElement> {
-  modelId: LLMID | string
+  provider: ModelProvider
   height: number
   width: number
 }
 
 export const ModelIcon: FC<ModelIconProps> = ({
-  modelId,
+  provider,
   height,
   width,
   ...props
 }) => {
   const { theme } = useTheme()
 
-  switch (modelId as LLMID) {
-    case "gpt-4-turbo-preview":
-    case "gpt-4-vision-preview":
-    case "gpt-3.5-turbo-0613":
-    case "gpt-3.5-turbo-1106":
+  switch (provider as ModelProvider) {
+    case "openai":
       return (
         <OpenAISVG
           className={cn(
@@ -43,9 +40,7 @@ export const ModelIcon: FC<ModelIconProps> = ({
           height={height}
         />
       )
-    case "mistral-tiny":
-    case "mistral-small":
-    case "mistral-medium":
+    case "mistral":
       return (
         <Image
           className={cn(
@@ -58,8 +53,7 @@ export const ModelIcon: FC<ModelIconProps> = ({
           height={height}
         />
       )
-    case "claude-2.1":
-    case "claude-instant-1.2":
+    case "anthropic":
       return (
         <AnthropicSVG
           className={cn(
@@ -71,8 +65,7 @@ export const ModelIcon: FC<ModelIconProps> = ({
           height={height}
         />
       )
-    case "gemini-pro":
-    case "gemini-pro-vision":
+    case "google":
       return (
         <GoogleSVG
           className={cn(
@@ -84,8 +77,7 @@ export const ModelIcon: FC<ModelIconProps> = ({
           height={height}
         />
       )
-    case "pplx-7b-online":
-    case "pplx-70b-online":
+    case "perplexity":
       return (
         <Image
           className={cn(
@@ -99,9 +91,9 @@ export const ModelIcon: FC<ModelIconProps> = ({
         />
       )
     default:
-      if (!modelId || modelId.includes("/")) {
+      if (!provider || provider.includes("/")) {
         return <IconSparkles size={width} />
-      } else if (modelId.includes("llama")) {
+      } else if (provider.includes("llama")) {
         return (
           <Image
             className={cn(
@@ -114,7 +106,7 @@ export const ModelIcon: FC<ModelIconProps> = ({
             height={height}
           />
         )
-      } else if (modelId.includes("mistral") || modelId.includes("mixtral")) {
+      } else if (provider.includes("mistral") || provider.includes("mixtral")) {
         return (
           <Image
             className={cn(
@@ -127,7 +119,7 @@ export const ModelIcon: FC<ModelIconProps> = ({
             height={height}
           />
         )
-      } else if (modelId.includes("deepseek")) {
+      } else if (provider.includes("deepseek")) {
         return (
           <Image
             className={cn(
@@ -140,7 +132,7 @@ export const ModelIcon: FC<ModelIconProps> = ({
             height={height}
           />
         )
-      } else if (modelId.includes("yi")) {
+      } else if (provider.includes("yi")) {
         return (
           <Image
             className={cn(
