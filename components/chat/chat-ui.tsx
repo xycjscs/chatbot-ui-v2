@@ -194,8 +194,8 @@ export const ChatUI: FC<ChatUIProps> = ({}) => {
         <ChatSecondaryButtons />
       </div>
 
-      <div className="bg-secondary flex max-h-[50px] min-h-[50px] w-full items-center justify-center border-b-2 px-20 font-bold">
-        <div className="max-w-[300px] truncate">
+      <div className="bg-secondary flex max-h-[50px] min-h-[50px] w-full items-center justify-center border-b-2 px-8 font-bold">
+        <div className="max-w-[150px] truncate sm:max-w-[150px] md:max-w-[300px] lg:max-w-[400px] xl:max-w-[700px]">
           {selectedChat?.name || "Chat"}
         </div>
       </div>
