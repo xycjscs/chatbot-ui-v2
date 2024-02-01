@@ -90,63 +90,33 @@ export const ModelIcon: FC<ModelIconProps> = ({
           height={height}
         />
       )
+    case "yi":
+      return (
+        <Image
+          className={cn(
+            "rounded-sm p-1",
+            theme === "dark" ? "bg-white" : "border-[1px] border-black"
+          )}
+          src={ai01.src}
+          alt="yi"
+          width={width}
+          height={height}
+        />
+      )
+    case "deepseek":
+      return (
+        <Image
+          className={cn(
+            "rounded-sm p-1",
+            theme === "dark" ? "bg-white" : "border-[1px] border-black"
+          )}
+          src={deepseek.src}
+          alt="Deepseek"
+          width={width}
+          height={height}
+        />
+      )
     default:
-      if (!provider || provider.includes("/")) {
-        return <IconSparkles size={width} />
-      } else if (provider.includes("llama")) {
-        return (
-          <Image
-            className={cn(
-              "rounded-sm p-1",
-              theme === "dark" ? "bg-white" : "border-[1px] border-black"
-            )}
-            src={meta.src}
-            alt="Mistral"
-            width={width}
-            height={height}
-          />
-        )
-      } else if (provider.includes("mistral") || provider.includes("mixtral")) {
-        return (
-          <Image
-            className={cn(
-              "rounded-sm p-1",
-              theme === "dark" ? "bg-white" : "border-[1px] border-black"
-            )}
-            src={mistral.src}
-            alt="Mistral"
-            width={width}
-            height={height}
-          />
-        )
-      } else if (provider.includes("deepseek")) {
-        return (
-          <Image
-            className={cn(
-              "rounded-sm p-1",
-              theme === "dark" ? "bg-white" : "border-[1px] border-black"
-            )}
-            src={deepseek.src}
-            alt="Deepseek"
-            width={width}
-            height={height}
-          />
-        )
-      } else if (provider.includes("yi")) {
-        return (
-          <Image
-            className={cn(
-              "rounded-sm p-1",
-              theme === "dark" ? "bg-white" : "border-[1px] border-black"
-            )}
-            src={ai01.src}
-            alt="yi"
-            width={width}
-            height={height}
-          />
-        )
-      } else {
-        return <IconSparkles size={width} />
-      }
+      return <IconSparkles size={width} />
   }
 }
