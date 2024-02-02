@@ -24,4 +24,4 @@ const Deepseek_chat: LLM = {
   imageInput: false
 }
 
-export const Deepseek_LLM_LIST: LLM[] = [Deepseek_coder]
+export const Deepseek_LLM_LIST: LLM[] = [Deepseek_coder, Deepseek_chat]

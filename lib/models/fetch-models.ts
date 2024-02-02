@@ -6,6 +6,7 @@ import { LLM_LIST_MAP } from "./llm/llm-list"
 export const fetchHostedModels = async (profile: Tables<"profiles">) => {
   try {
     const providers = [
+      "zhipu",
       "openai",
       "google",
       "azure",
@@ -13,8 +14,8 @@ export const fetchHostedModels = async (profile: Tables<"profiles">) => {
       "mistral",
       "perplexity",
       "yi",
-      "deepseek",
-      "zhipu"
+      "deepseek"
+      //这里用来模型排序
     ]
 
     const response = await fetch("/api/keys")
