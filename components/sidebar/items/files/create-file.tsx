@@ -56,7 +56,7 @@ export const CreateFile: FC<CreateFileProps> = ({ isOpen, onOpenChange }) => {
       renderInputs={() => (
         <>
           <div className="space-y-1">
-            <Label>File</Label>
+            <Label>File (文件名不含中文)</Label>
 
             <Input
               type="file"
