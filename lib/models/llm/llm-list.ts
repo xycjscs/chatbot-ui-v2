@@ -10,11 +10,11 @@ import { Deepseek_LLM_LIST } from "./deepseek-llm-list"
 import { ZHIPU_LLM_LIST } from "./zhipu-llm-list"
 
 export const LLM_LIST: LLM[] = [
+  ...ZHIPU_LLM_LIST,
   ...OPENAI_LLM_LIST,
   ...MISTRAL_LLM_LIST,
   ...Deepseek_LLM_LIST,
   ...Yi_LLM_LIST,
-  ...ZHIPU_LLM_LIST,
 
   ...GOOGLE_LLM_LIST,
   ...PERPLEXITY_LLM_LIST,
