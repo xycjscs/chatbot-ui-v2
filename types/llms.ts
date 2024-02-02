@@ -8,6 +8,7 @@ export type LLMID =
   | PerplexityLLMID
   | YiLLMID
   | DeepseekLLMID
+  | ZhipuLLMID
 
 // OpenAI Models (UPDATED 1/29/24)
 export type OpenAILLMID =
@@ -66,3 +67,9 @@ export interface LLM {
 export interface OpenRouterLLM extends LLM {
   maxContext: number
 }
+
+// Zhipu Models
+export type ZhipuLLMID =
+  | "glm-4" // GLM-4
+  | "glm-4v" // GLM-4 Vision
+  | "glm-3-turbo" // GLM-3 Turbo

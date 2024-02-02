@@ -13,7 +13,8 @@ export const fetchHostedModels = async (profile: Tables<"profiles">) => {
       "mistral",
       "perplexity",
       "yi",
-      "deepseek"
+      "deepseek",
+      "zhipu"
     ]
 
     const response = await fetch("/api/keys")

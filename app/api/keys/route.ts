@@ -21,7 +21,9 @@ export async function GET() {
     azure_gpt_35_turbo_name: VALID_ENV_KEYS.AZURE_GPT_35_TURBO_NAME,
     azure_gpt_45_vision_name: VALID_ENV_KEYS.AZURE_GPT_45_VISION_NAME,
     azure_gpt_45_turbo_name: VALID_ENV_KEYS.AZURE_GPT_45_TURBO_NAME,
-    azure_embeddings_name: VALID_ENV_KEYS.AZURE_EMBEDDINGS_NAME
+    azure_embeddings_name: VALID_ENV_KEYS.AZURE_EMBEDDINGS_NAME,
+
+    zhipu: VALID_ENV_KEYS.ZHIPU_API_KEY
   }
 
   const isUsingEnvKeyMap = Object.keys(envKeyMap).reduce<

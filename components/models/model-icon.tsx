@@ -12,6 +12,7 @@ import { FC, HTMLAttributes } from "react"
 import { AnthropicSVG } from "../icons/anthropic-svg"
 import { GoogleSVG } from "../icons/google-svg"
 import { OpenAISVG } from "../icons/openai-svg"
+import zhipu from "@/public/providers/zhipu.png"
 
 interface ModelIconProps extends HTMLAttributes<HTMLDivElement> {
   provider: ModelProvider
@@ -112,6 +113,19 @@ export const ModelIcon: FC<ModelIconProps> = ({
           )}
           src={deepseek.src}
           alt="Deepseek"
+          width={width}
+          height={height}
+        />
+      )
+    case "zhipu":
+      return (
+        <Image
+          className={cn(
+            "rounded-sm p-1",
+            theme === "dark" ? "bg-white" : "border-[1px] border-black"
+          )}
+          src={zhipu.src}
+          alt="Zhipu"
           width={width}
           height={height}
         />

@@ -9,3 +9,4 @@ export type ModelProvider =
   | "deepseek"
   | "openrouter"
   | "custom"
+  | "zhipu"
