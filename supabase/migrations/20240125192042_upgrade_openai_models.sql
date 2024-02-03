@@ -92,10 +92,10 @@ BEGIN
         NEW.id,
         TRUE,
         'Home',
-        4096,
+        8192,
         'gpt-3.5-turbo-0125', -- Updated default model
         'You are a friendly, helpful AI assistant.',
-        0.5,
+        0.7,
         'My home workspace.',
         'openai',
         TRUE,
