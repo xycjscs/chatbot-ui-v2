@@ -91,8 +91,8 @@ export const GlobalState: FC<GlobalStateProps> = ({ children }) => {
   const [chatSettings, setChatSettings] = useState<ChatSettings>({
     model: "gpt-3.5-turbo-0125",
     prompt: "You are a helpful AI assistant.",
-    temperature: 0.5,
-    contextLength: 4000,
+    temperature: 0.7,
+    contextLength: 8192,
     includeProfileContext: true,
     includeWorkspaceInstructions: true,
     embeddingsProvider: "openai"
