@@ -93,7 +93,7 @@ BEGIN
         TRUE,
         'Home',
         4096,
-        'gpt-3.5-turbo-1106', -- Updated default model
+        'gpt-3.5-turbo-0125', -- Updated default model
         'You are a friendly, helpful AI assistant.',
         0.5,
         'My home workspace.',
