@@ -14,7 +14,7 @@ const buildBasePrompt = (
     fullPrompt += `<INJECT ROLE>\nYou are not an AI. You are ${assistant.name}.\n</INJECT ROLE>\n\n`
   }
 
-  //fullPrompt += `Today is ${new Date().toLocaleDateString()}.\n\n`
+  fullPrompt += `Today is ${new Date().toLocaleDateString()}.\n\n`
 
   if (profileContext) {
     fullPrompt += `User Info:\n${profileContext}\n\n`
@@ -118,35 +118,53 @@ export async function buildFinalMessages(
   }
 
   finalMessages.unshift(tempSystemMessage)
-
   finalMessages = finalMessages.map(message => {
     let content
 
     if (message.image_paths.length > 0) {
-      content = [
-        {
-          type: "text",
-          text: message.content
-        },
-        ...message.image_paths.map(path => {
-          let formedUrl = ""
-
-          if (path.startsWith("data")) {
-            formedUrl = path
-          } else {
-            const chatImage = chatImages.find(image => image.path === path)
-
-            if (chatImage) {
-              formedUrl = chatImage.base64
+      if (true) {
+        //true for ollama, false for gpt-4 vission
+        const base64Images = message.image_paths
+          .map(path => {
+            if (path.startsWith("data")) {
+              return path.split(",")[1]
+            } else {
+              const chatImage = chatImages.find(image => image.path === path)
+              return chatImage ? chatImage.base64.split(",")[1] : null
             }
-          }
+          })
+          .filter(imageBase64 => imageBase64 != null)
+        return {
+          role: message.role,
+          content: message.content,
+          images: base64Images
+        }
+      } else {
+        content = [
+          {
+            type: "text",
+            text: message.content
+          },
+          ...message.image_paths.map(path => {
+            let formedUrl = ""
 
-          return {
-            type: "image_url",
-            image_url: formedUrl
-          }
-        })
-      ]
+            if (path.startsWith("data")) {
+              formedUrl = path
+            } else {
+              const chatImage = chatImages.find(image => image.path === path)
+
+              if (chatImage) {
+                formedUrl = chatImage.base64
+              }
+            }
+
+            return {
+              type: "image_url",
+              image_url: formedUrl
+            }
+          })
+        ]
+      }
     } else {
       content = message.content
     }

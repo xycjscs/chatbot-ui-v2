@@ -11,7 +11,8 @@ export const ACCEPTED_FILE_TYPES = [
   "application/json",
   "text/markdown",
   "application/pdf",
-  "text/plain"
+  "text/plain",
+  "image/*"
 ].join(",")
 
 export const useSelectFileHandler = () => {

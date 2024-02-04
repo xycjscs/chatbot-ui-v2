@@ -75,7 +75,7 @@ export const fetchOllamaModels = async () => {
       provider: "ollama",
       hostedId: model.name,
       platformLink: "https://ollama.ai/library",
-      imageInput: false
+      imageInput: true
     }))
 
     return localModels
