@@ -25,9 +25,6 @@ export async function POST(request: Request) {
       `${process.env.NEXT_PUBLIC_OLLAMA_URL}/api/chat`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
         body: body
       }
     )

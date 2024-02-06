@@ -155,15 +155,17 @@ export const handleLocalChat = async (
 ) => {
   const formattedMessages = await buildFinalMessages(payload, profile, [])
 
-  const requestBody = {
-    chatSettings: payload.chatSettings,
-    messages: formattedMessages
-  }
-
   // Ollama API: https://github.com/jmorganca/ollama/blob/main/docs/api.md
   const response = await fetchChatResponse(
-    "/api/chat/ollama",
-    requestBody,
+    process.env.NEXT_PUBLIC_OLLAMA_URL + "/api/chat",
+    {
+      model: chatSettings.model,
+      messages: formattedMessages,
+      options: {
+        temperature: payload.chatSettings.temperature
+      },
+      stream: false
+    },
     false,
     newAbortController,
     setIsGenerating,
