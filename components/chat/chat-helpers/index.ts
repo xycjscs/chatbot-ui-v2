@@ -148,12 +148,18 @@ export const handleLocalChat = async (
   tempAssistantMessage: ChatMessage,
   isRegeneration: boolean,
   newAbortController: AbortController,
+  newMessageImages: MessageImage[],
+  chatImages: MessageImage[],
   setIsGenerating: React.Dispatch<React.SetStateAction<boolean>>,
   setFirstTokenReceived: React.Dispatch<React.SetStateAction<boolean>>,
   setChatMessages: React.Dispatch<React.SetStateAction<ChatMessage[]>>,
   setToolInUse: React.Dispatch<React.SetStateAction<string>>
 ) => {
-  const formattedMessages = await buildFinalMessages(payload, profile, [])
+  const formattedMessages = await buildFinalMessages(
+    payload,
+    profile,
+    chatImages
+  )
 
   // Ollama API: https://github.com/jmorganca/ollama/blob/main/docs/api.md
   const response = await fetchChatResponse(
@@ -171,6 +177,8 @@ export const handleLocalChat = async (
     setIsGenerating,
     setChatMessages
   )
+
+  console.log(formattedMessages)
 
   return await processResponse(
     response,
@@ -224,7 +232,7 @@ export const handleHostedChat = async (
     messages: formattedMessages,
     customModelId: provider === "custom" ? modelData.hostedId : ""
   }
-
+  console.log(requestBody)
   const response = await fetchChatResponse(
     apiEndpoint,
     requestBody,

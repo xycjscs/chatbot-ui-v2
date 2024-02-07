@@ -277,6 +277,8 @@ export const useChatHandler = () => {
             tempAssistantChatMessage,
             isRegeneration,
             newAbortController,
+            newMessageImages,
+            chatImages,
             setIsGenerating,
             setFirstTokenReceived,
             setChatMessages,

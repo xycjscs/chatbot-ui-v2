@@ -122,8 +122,12 @@ export async function buildFinalMessages(
     let content
 
     if (message.image_paths.length > 0) {
-      if (true) {
-        //true for ollama, false for gpt-4 vission
+      console.log(message.image_paths)
+      if (
+        chatSettings.model.includes("llava") ||
+        chatSettings.model.includes("qwen")
+      ) {
+        //true for ollama, false for gpt-4 glm-4v vission
         const base64Images = message.image_paths
           .map(path => {
             if (path.startsWith("data")) {
