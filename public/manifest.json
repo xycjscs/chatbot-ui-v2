@@ -1,21 +1,11 @@
 {
-  "short_name": "Chatbot UI",
-  "name": "Chatbot UI",
+  "short_name": "MIML",
+  "name": "MIML",
   "icons": [
     {
-      "src": "/icon-192x192.png",
-      "type": "image/ico",
-      "sizes": "192x192"
-    },
-    {
-      "src": "/icon-256x256.png",
+      "src": "/favicon.png",
       "type": "image/png",
-      "sizes": "256x256"
-    },
-    {
-      "src": "/icon-512x512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "222x222"
     }
   ],
   "start_url": "/",

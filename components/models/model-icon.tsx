@@ -13,6 +13,8 @@ import { AnthropicSVG } from "../icons/anthropic-svg"
 import { GoogleSVG } from "../icons/google-svg"
 import { OpenAISVG } from "../icons/openai-svg"
 import zhipu from "@/public/providers/zhipu.png"
+import ollama from "@/public/providers/ollama.png"
+import openrouter from "@/public/providers/openrouter.png"
 
 interface ModelIconProps extends HTMLAttributes<HTMLDivElement> {
   provider: ModelProvider
@@ -29,6 +31,19 @@ export const ModelIcon: FC<ModelIconProps> = ({
   const { theme } = useTheme()
 
   switch (provider as ModelProvider) {
+    case "zhipu":
+      return (
+        <Image
+          className={cn(
+            "rounded-sm p-1",
+            theme === "dark" ? "bg-white" : "border-[1px] border-black"
+          )}
+          src={zhipu.src}
+          alt="Zhipu"
+          width={width}
+          height={height}
+        />
+      )
     case "openai":
       return (
         <OpenAISVG
@@ -117,15 +132,28 @@ export const ModelIcon: FC<ModelIconProps> = ({
           height={height}
         />
       )
-    case "zhipu":
+    case "ollama":
       return (
         <Image
           className={cn(
             "rounded-sm p-1",
             theme === "dark" ? "bg-white" : "border-[1px] border-black"
           )}
-          src={zhipu.src}
-          alt="Zhipu"
+          src={ollama.src}
+          alt="Ollama"
+          width={width}
+          height={height}
+        />
+      )
+    case "openrouter":
+      return (
+        <Image
+          className={cn(
+            "rounded-sm p-1",
+            theme === "dark" ? "bg-white" : "border-[1px] border-black"
+          )}
+          src={openrouter.src}
+          alt="openrouter"
           width={width}
           height={height}
         />
