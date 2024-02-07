@@ -145,7 +145,12 @@ export const Message: FC<MessageProps> = ({
     image => image.path === selectedAssistant?.image_path
   )?.base64
 
-  const modelDetails = LLM_LIST.find(model => model.modelId === message.model)
+  // 将两个数组串联起来，首先查找 LLM_LIST，如果找不到，再查找 availableLocalModels
+  const modelDetails = [
+    ...LLM_LIST,
+    ...availableLocalModels,
+    ...availableOpenRouterModels
+  ].find(model => model.modelId === message.model)
 
   return (
     <div

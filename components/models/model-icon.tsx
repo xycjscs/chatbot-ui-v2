@@ -14,7 +14,8 @@ import { GoogleSVG } from "../icons/google-svg"
 import { OpenAISVG } from "../icons/openai-svg"
 import zhipu from "@/public/providers/zhipu.png"
 import ollama from "@/public/providers/ollama.png"
-import openrouter from "@/public/providers/openrouter.png"
+import { OllamaSVG } from "../icons/ollama-svg"
+import { OpenrouterSVG } from "../icons/openrouter-svg"
 
 interface ModelIconProps extends HTMLAttributes<HTMLDivElement> {
   provider: ModelProvider
@@ -134,26 +135,24 @@ export const ModelIcon: FC<ModelIconProps> = ({
       )
     case "ollama":
       return (
-        <Image
+        <OllamaSVG
           className={cn(
-            "rounded-sm p-1",
+            "rounded-sm bg-[#fff] p-1 text-black",
+            props.className,
             theme === "dark" ? "bg-white" : "border-[1px] border-black"
           )}
-          src={ollama.src}
-          alt="Ollama"
           width={width}
           height={height}
         />
       )
     case "openrouter":
       return (
-        <Image
+        <OpenrouterSVG
           className={cn(
-            "rounded-sm p-1",
+            "rounded-sm bg-[#fff] p-1 text-black",
+            props.className,
             theme === "dark" ? "bg-white" : "border-[1px] border-black"
           )}
-          src={openrouter.src}
-          alt="openrouter"
           width={width}
           height={height}
         />

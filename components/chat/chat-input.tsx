@@ -47,7 +47,9 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
     setFocusFile,
     chatSettings,
     selectedTools,
-    setSelectedTools
+    setSelectedTools,
+    availableLocalModels,
+    availableOpenRouterModels
   } = useContext(ChatbotUIContext)
 
   const {
@@ -108,9 +110,11 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
   }
 
   const handlePaste = (event: React.ClipboardEvent) => {
-    const imagesAllowed = LLM_LIST.find(
-      llm => llm.modelId === chatSettings?.model
-    )?.imageInput
+    const imagesAllowed = [
+      ...LLM_LIST,
+      ...availableLocalModels,
+      ...availableOpenRouterModels
+    ].find(llm => llm.modelId === chatSettings?.model)?.imageInput
     if (!imagesAllowed) return
 
     const items = event.clipboardData.items

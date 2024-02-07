@@ -178,7 +178,7 @@ export const handleLocalChat = async (
     setChatMessages
   )
 
-  console.log(formattedMessages)
+  //console.log(formattedMessages)
 
   return await processResponse(
     response,
@@ -232,7 +232,7 @@ export const handleHostedChat = async (
     messages: formattedMessages,
     customModelId: provider === "custom" ? modelData.hostedId : ""
   }
-  console.log(requestBody)
+  //console.log(requestBody)
   const response = await fetchChatResponse(
     apiEndpoint,
     requestBody,

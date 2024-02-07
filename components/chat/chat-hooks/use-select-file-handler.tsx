@@ -11,8 +11,7 @@ export const ACCEPTED_FILE_TYPES = [
   "application/json",
   "text/markdown",
   "application/pdf",
-  "text/plain",
-  "image/*"
+  "text/plain"
 ].join(",")
 
 export const useSelectFileHandler = () => {
@@ -24,7 +23,9 @@ export const useSelectFileHandler = () => {
     setNewMessageFiles,
     setShowFilesDisplay,
     setFiles,
-    setUseRetrieval
+    setUseRetrieval,
+    availableLocalModels,
+    availableOpenRouterModels
   } = useContext(ChatbotUIContext)
 
   const [filesToAccept, setFilesToAccept] = useState(ACCEPTED_FILE_TYPES)
@@ -35,7 +36,11 @@ export const useSelectFileHandler = () => {
 
   const handleFilesToAccept = () => {
     const model = chatSettings?.model
-    const FULL_MODEL = LLM_LIST.find(llm => llm.modelId === model)
+    const FULL_MODEL = [
+      ...LLM_LIST,
+      ...availableLocalModels,
+      ...availableOpenRouterModels
+    ].find(llm => llm.modelId === model)
 
     if (!FULL_MODEL) return
 

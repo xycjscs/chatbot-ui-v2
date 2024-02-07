@@ -75,7 +75,7 @@ export const fetchOllamaModels = async () => {
       provider: "ollama",
       hostedId: model.name,
       platformLink: "https://ollama.ai/library",
-      imageInput: true
+      imageInput: model.name.includes("vision") || model.name.includes("视觉")
     }))
 
     return localModels
@@ -105,7 +105,7 @@ export const fetchOpenRouterModels = async () => {
         provider: "openrouter",
         hostedId: model.name,
         platformLink: "https://openrouter.dev",
-        imageInput: false,
+        imageInput: model.id.includes("vision") || model.id.includes("视觉"),
         maxContext: model.context_length
       })
     )

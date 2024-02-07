@@ -122,7 +122,7 @@ export async function buildFinalMessages(
     let content
 
     if (message.image_paths.length > 0) {
-      console.log(message.image_paths)
+      //console.log(message.image_paths)
       if (
         chatSettings.model.includes("llava") ||
         chatSettings.model.includes("qwen")
