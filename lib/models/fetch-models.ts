@@ -86,6 +86,18 @@ export const fetchOllamaModels = async () => {
 
 export const fetchOpenRouterModels = async () => {
   try {
+    const cachedData = localStorage.getItem("openRouterModelsCache")
+    const now = new Date()
+
+    if (cachedData) {
+      const { data: cachedModels, timestamp } = JSON.parse(cachedData)
+
+      // 检查缓存是否已经超过24小时
+      if (now.getTime() - timestamp < 24 * 60 * 60 * 1000) {
+        return cachedModels // 返回缓存的数据
+      }
+    }
+
     const response = await fetch("https://openrouter.ai/api/v1/models")
 
     if (!response.ok) {
@@ -108,6 +120,12 @@ export const fetchOpenRouterModels = async () => {
         imageInput: model.id.includes("vision") || model.id.includes("视觉"),
         maxContext: model.context_length
       })
+    )
+
+    // 更新缓存
+    localStorage.setItem(
+      "openRouterModelsCache",
+      JSON.stringify({ data: openRouterModels, timestamp: now.getTime() })
     )
 
     return openRouterModels
