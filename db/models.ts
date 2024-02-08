@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
+import { removeLocalStorageItemsByPrefix } from "./deletcache"
 
 export const getModelById = async (modelId: string) => {
   const { data: model, error } = await supabase
@@ -75,6 +76,9 @@ export const createModel = async (
     workspace_id: workspace_id
   })
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("modelData")
+
   return createdModel
 }
 
@@ -99,6 +103,9 @@ export const createModels = async (
     }))
   )
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("modelData")
+
   return createdModels
 }
 
@@ -117,6 +124,9 @@ export const createModelWorkspace = async (item: {
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("modelData")
+
   return createdModelWorkspace
 }
 
@@ -129,6 +139,9 @@ export const createModelWorkspaces = async (
     .select("*")
 
   if (error) throw new Error(error.message)
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("modelData")
 
   return createdModelWorkspaces
 }
@@ -148,6 +161,9 @@ export const updateModel = async (
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("modelData")
+
   return updatedModel
 }
 
@@ -157,6 +173,9 @@ export const deleteModel = async (modelId: string) => {
   if (error) {
     throw new Error(error.message)
   }
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("modelData")
 
   return true
 }
@@ -172,6 +191,9 @@ export const deleteModelWorkspace = async (
     .eq("workspace_id", workspaceId)
 
   if (error) throw new Error(error.message)
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("modelData")
 
   return true
 }

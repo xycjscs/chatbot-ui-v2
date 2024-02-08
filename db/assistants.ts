@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
+import { removeLocalStorageItemsByPrefix } from "./deletcache"
 
 export const getAssistantById = async (assistantId: string) => {
   const { data: assistant, error } = await supabase
@@ -79,6 +80,9 @@ export const createAssistant = async (
     workspace_id
   })
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("assistant")
+
   return createdAssistant
 }
 
@@ -103,6 +107,9 @@ export const createAssistants = async (
     }))
   )
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("assistant")
+
   return createdAssistants
 }
 
@@ -121,6 +128,9 @@ export const createAssistantWorkspace = async (item: {
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("assistant")
+
   return createdAssistantWorkspace
 }
 
@@ -133,6 +143,9 @@ export const createAssistantWorkspaces = async (
     .select("*")
 
   if (error) throw new Error(error.message)
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("assistant")
 
   return createdAssistantWorkspaces
 }
@@ -165,6 +178,9 @@ export const deleteAssistant = async (assistantId: string) => {
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("assistant")
+
   return true
 }
 
@@ -179,6 +195,9 @@ export const deleteAssistantWorkspace = async (
     .eq("workspace_id", workspaceId)
 
   if (error) throw new Error(error.message)
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("assistant")
 
   return true
 }

@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
+import { removeLocalStorageItemsByPrefix } from "./deletcache"
 
 export const getWorkspaceById = async (workspaceId: string) => {
   const { data: workspace, error } = await supabase
@@ -42,6 +43,9 @@ export const createWorkspace = async (
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("workspaces")
+
   return createdWorkspace
 }
 
@@ -60,6 +64,9 @@ export const updateWorkspace = async (
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("workspaces")
+
   return updatedWorkspace
 }
 
@@ -72,6 +79,9 @@ export const deleteWorkspace = async (workspaceId: string) => {
   if (error) {
     throw new Error(error.message)
   }
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("workspaces")
 
   return true
 }

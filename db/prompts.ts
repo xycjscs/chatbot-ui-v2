@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
+import { removeLocalStorageItemsByPrefix } from "./deletcache"
 
 export const getPromptById = async (promptId: string) => {
   const { data: prompt, error } = await supabase
@@ -75,6 +76,9 @@ export const createPrompt = async (
     workspace_id
   })
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("promptData")
+
   return createdPrompt
 }
 
@@ -99,6 +103,9 @@ export const createPrompts = async (
     }))
   )
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("promptData")
+
   return createdPrompts
 }
 
@@ -116,6 +123,9 @@ export const createPromptWorkspace = async (item: {
   if (error) {
     throw new Error(error.message)
   }
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("promptData")
 
   return createdPromptWorkspace
 }
@@ -148,6 +158,9 @@ export const updatePrompt = async (
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("promptData")
+
   return updatedPrompt
 }
 
@@ -157,6 +170,9 @@ export const deletePrompt = async (promptId: string) => {
   if (error) {
     throw new Error(error.message)
   }
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("promptData")
 
   return true
 }
@@ -172,6 +188,9 @@ export const deletePromptWorkspace = async (
     .eq("workspace_id", workspaceId)
 
   if (error) throw new Error(error.message)
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("promptData")
 
   return true
 }

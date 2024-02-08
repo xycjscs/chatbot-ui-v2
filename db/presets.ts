@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
+import { removeLocalStorageItemsByPrefix } from "./deletcache"
 
 export const getPresetById = async (presetId: string) => {
   const { data: preset, error } = await supabase
@@ -75,6 +76,9 @@ export const createPreset = async (
     workspace_id: workspace_id
   })
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("presetData")
+
   return createdPreset
 }
 
@@ -98,6 +102,8 @@ export const createPresets = async (
       workspace_id
     }))
   )
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("presetData")
 
   return createdPresets
 }
@@ -116,6 +122,9 @@ export const createPresetWorkspace = async (item: {
   if (error) {
     throw new Error(error.message)
   }
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("presetData")
 
   return createdPresetWorkspace
 }
@@ -148,6 +157,9 @@ export const updatePreset = async (
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("presetData")
+
   return updatedPreset
 }
 
@@ -157,6 +169,9 @@ export const deletePreset = async (presetId: string) => {
   if (error) {
     throw new Error(error.message)
   }
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("presetData")
 
   return true
 }
@@ -172,6 +187,9 @@ export const deletePresetWorkspace = async (
     .eq("workspace_id", workspaceId)
 
   if (error) throw new Error(error.message)
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("presetData")
 
   return true
 }

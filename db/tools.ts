@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
+import { removeLocalStorageItemsByPrefix } from "./deletcache"
 
 export const getToolById = async (toolId: string) => {
   const { data: tool, error } = await supabase
@@ -75,6 +76,9 @@ export const createTool = async (
     workspace_id
   })
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("toolData")
+
   return createdTool
 }
 
@@ -99,6 +103,9 @@ export const createTools = async (
     }))
   )
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("toolData")
+
   return createdTools
 }
 
@@ -117,6 +124,9 @@ export const createToolWorkspace = async (item: {
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("toolData")
+
   return createdToolWorkspace
 }
 
@@ -129,6 +139,9 @@ export const createToolWorkspaces = async (
     .select("*")
 
   if (error) throw new Error(error.message)
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("toolData")
 
   return createdToolWorkspaces
 }
@@ -148,6 +161,9 @@ export const updateTool = async (
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("toolData")
+
   return updatedTool
 }
 
@@ -157,6 +173,9 @@ export const deleteTool = async (toolId: string) => {
   if (error) {
     throw new Error(error.message)
   }
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("toolData")
 
   return true
 }
@@ -172,6 +191,9 @@ export const deleteToolWorkspace = async (
     .eq("workspace_id", workspaceId)
 
   if (error) throw new Error(error.message)
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("toolData")
 
   return true
 }

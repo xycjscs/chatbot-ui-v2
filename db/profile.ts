@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
+import { removeLocalStorageItemsByPrefix } from "./deletcache"
 
 export const getProfileByUserId = async (userId: string) => {
   const { data: profile, error } = await supabase
@@ -39,6 +40,9 @@ export const createProfile = async (profile: TablesInsert<"profiles">) => {
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("profile")
+
   return createdProfile
 }
 
@@ -57,6 +61,9 @@ export const updateProfile = async (
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("profile")
+
   return updatedProfile
 }
 
@@ -66,6 +73,9 @@ export const deleteProfile = async (profileId: string) => {
   if (error) {
     throw new Error(error.message)
   }
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("profile")
 
   return true
 }

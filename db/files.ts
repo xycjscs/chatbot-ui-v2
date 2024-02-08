@@ -3,6 +3,7 @@ import { TablesInsert, TablesUpdate } from "@/supabase/types"
 import mammoth from "mammoth"
 import { toast } from "sonner"
 import { uploadFile } from "./storage/files"
+import { removeLocalStorageItemsByPrefix } from "./deletcache"
 
 export const getFileById = async (fileId: string) => {
   const { data: file, error } = await supabase
@@ -71,6 +72,9 @@ export const createFileBasedOnExtension = async (
     const result = await mammoth.extractRawText({
       arrayBuffer
     })
+
+    // 更新成功后，清除本地缓存
+    removeLocalStorageItemsByPrefix("fileData")
 
     return createDocXFile(
       result.value,
@@ -191,6 +195,9 @@ export const createDocXFile = async (
 
   const fetchedFile = await getFileById(createdFile.id)
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("fileData")
+
   return fetchedFile
 }
 
@@ -214,6 +221,8 @@ export const createFiles = async (
       workspace_id
     }))
   )
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("fileData")
 
   return createdFiles
 }
@@ -233,6 +242,9 @@ export const createFileWorkspace = async (item: {
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("fileData")
+
   return createdFileWorkspace
 }
 
@@ -245,6 +257,9 @@ export const createFileWorkspaces = async (
     .select("*")
 
   if (error) throw new Error(error.message)
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("fileData")
 
   return createdFileWorkspaces
 }
@@ -264,6 +279,9 @@ export const updateFile = async (
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("fileData")
+
   return updatedFile
 }
 
@@ -273,6 +291,9 @@ export const deleteFile = async (fileId: string) => {
   if (error) {
     throw new Error(error.message)
   }
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("fileData")
 
   return true
 }
@@ -288,6 +309,9 @@ export const deleteFileWorkspace = async (
     .eq("workspace_id", workspaceId)
 
   if (error) throw new Error(error.message)
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("fileData")
 
   return true
 }
