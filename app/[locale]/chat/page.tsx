@@ -35,7 +35,7 @@ export default function ChatPage() {
   return (
     <>
       {chatMessages.length === 0 ? (
-        <div className="relative flex h-full flex-col items-center justify-center">
+        <div className=" relative flex h-full flex-col items-center justify-center bg-[url('/dragon.webp')] bg-cover bg-center">
           <div className="top-50% left-50% -translate-x-50% -translate-y-50% absolute mb-20">
             <Brand theme={theme === "dark" ? "dark" : "light"} />
             {/* 插入图片 */}
@@ -46,7 +46,7 @@ export default function ChatPage() {
                 width={100} // 图片宽度
                 height={100} // 图片高度
               />
-      </div>*/}
+          </div>*/}
           </div>
 
           <div className="absolute left-2 top-2">
