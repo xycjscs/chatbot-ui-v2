@@ -43,6 +43,7 @@ scratch.txt
 
 /app/api/chat/mistral/route-fetch.ts
 tool-schemas
+prompts
 
 sw.js
 sw.js.map

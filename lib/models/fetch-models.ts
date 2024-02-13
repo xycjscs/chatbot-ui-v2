@@ -7,7 +7,6 @@ export const fetchHostedModels = async (profile: Tables<"profiles">) => {
   try {
     const providers = [
       "zhipu",
-      "openai",
       "google",
       "azure",
       "anthropic",
@@ -17,6 +16,12 @@ export const fetchHostedModels = async (profile: Tables<"profiles">) => {
       "deepseek"
       //这里用来模型排序
     ]
+
+    if (profile.use_azure_openai) {
+      providers.push("azure")
+    } else {
+      providers.push("openai")
+    }
 
     const response = await fetch("/api/keys")
 
