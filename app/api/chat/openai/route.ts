@@ -30,10 +30,12 @@ export async function POST(request: Request) {
         baseURL: process.env.OPENAI_PROXY || "https://api.openai.com/v1"
       })
 
+      const cleanedMessage = latestMessage.replace("生成图片", "").trim()
+
       // Todo CHO20240112: Get those image generation parameters from the UI settings
       const response = await openai.images.generate({
         model: "dall-e-3",
-        prompt: latestMessage,
+        prompt: cleanedMessage,
         n: 1,
         size: "1024x1024"
       })
