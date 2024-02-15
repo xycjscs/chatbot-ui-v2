@@ -20,6 +20,8 @@ import { useParams, useRouter } from "next/navigation"
 import { ReactNode, useContext, useEffect, useState } from "react"
 import Loading from "../loading"
 
+import { FetchDataWithCache } from "@/db/fetchDataWithCache"
+
 interface WorkspaceLayoutProps {
   children: ReactNode
 }
@@ -133,26 +135,43 @@ export default function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
     const chats = await getChatsByWorkspaceId(workspaceId)
     setChats(chats)
 
-    const collectionData =
-      await getCollectionWorkspacesByWorkspaceId(workspaceId)
+    // 使用封装好的函数获取chats并设置
+    const collectionData = await FetchDataWithCache(
+      `collections-${workspaceId}`,
+      () => getCollectionWorkspacesByWorkspaceId(workspaceId)
+    )
     setCollections(collectionData.collections)
 
-    const folders = await getFoldersByWorkspaceId(workspaceId)
+    const folders = await FetchDataWithCache(`folders-${workspaceId}`, () =>
+      getFoldersByWorkspaceId(workspaceId)
+    )
     setFolders(folders)
 
-    const fileData = await getFileWorkspacesByWorkspaceId(workspaceId)
+    const fileData = await FetchDataWithCache(`fileData-${workspaceId}`, () =>
+      getFileWorkspacesByWorkspaceId(workspaceId)
+    )
     setFiles(fileData.files)
 
-    const presetData = await getPresetWorkspacesByWorkspaceId(workspaceId)
+    const presetData = await FetchDataWithCache(
+      `presetData-${workspaceId}`,
+      () => getPresetWorkspacesByWorkspaceId(workspaceId)
+    )
     setPresets(presetData.presets)
 
-    const promptData = await getPromptWorkspacesByWorkspaceId(workspaceId)
+    const promptData = await FetchDataWithCache(
+      `promptData-${workspaceId}`,
+      () => getPromptWorkspacesByWorkspaceId(workspaceId)
+    )
     setPrompts(promptData.prompts)
 
-    const toolData = await getToolWorkspacesByWorkspaceId(workspaceId)
+    const toolData = await FetchDataWithCache(`toolData-${workspaceId}`, () =>
+      getToolWorkspacesByWorkspaceId(workspaceId)
+    )
     setTools(toolData.tools)
 
-    const modelData = await getModelWorkspacesByWorkspaceId(workspaceId)
+    const modelData = await FetchDataWithCache(`modelData-${workspaceId}`, () =>
+      getModelWorkspacesByWorkspaceId(workspaceId)
+    )
     setModels(modelData.models)
 
     setChatSettings({
