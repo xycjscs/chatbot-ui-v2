@@ -13,7 +13,7 @@ import { FC, useState } from "react"
 import { useSelectFileHandler } from "../chat/chat-hooks/use-select-file-handler"
 import { CommandK } from "../utility/command-k"
 
-export const SIDEBAR_WIDTH = 235
+export const SIDEBAR_WIDTH = 290
 
 interface DashboardProps {
   children: React.ReactNode
@@ -88,7 +88,9 @@ export const Dashboard: FC<DashboardProps> = ({ children }) => {
       </Button>
 
       <div
-        className={cn("border-r-2 duration-200 dark:border-none")}
+        className={cn(
+          "bg-background absolute z-50 h-full border-r-2 duration-200 lg:relative"
+        )}
         style={{
           // Sidebar
           minWidth: showSidebar ? `${SIDEBAR_WIDTH}px` : "0px",
