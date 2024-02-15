@@ -1,32 +1,41 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
 import { removeLocalStorageItemsByPrefix } from "./deletcache"
+import { FetchDataWithCache } from "./fetchDataWithCache"
 
 export const getProfileByUserId = async (userId: string) => {
-  const { data: profile, error } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("user_id", userId)
-    .single()
+  const fetchData = async () => {
+    const { data: profile, error } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("user_id", userId)
+      .single()
 
-  if (!profile) {
-    throw new Error(error.message)
+    if (!profile) {
+      throw new Error(error.message)
+    }
+
+    return profile
   }
-
-  return profile
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(`ProfileByUserId-${userId}`, fetchData)
 }
 
 export const getProfilesByUserId = async (userId: string) => {
-  const { data: profiles, error } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("user_id", userId)
+  const fetchData = async () => {
+    const { data: profiles, error } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("user_id", userId)
 
-  if (!profiles) {
-    throw new Error(error.message)
+    if (!profiles) {
+      throw new Error(error.message)
+    }
+
+    return profiles
   }
-
-  return profiles
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(`ProfilesByUserId-${userId}`, fetchData)
 }
 
 export const createProfile = async (profile: TablesInsert<"profiles">) => {
@@ -41,7 +50,7 @@ export const createProfile = async (profile: TablesInsert<"profiles">) => {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("profile")
+  removeLocalStorageItemsByPrefix("Profiles")
 
   return createdProfile
 }
@@ -62,7 +71,7 @@ export const updateProfile = async (
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("profile")
+  removeLocalStorageItemsByPrefix("Profiles")
 
   return updatedProfile
 }
@@ -75,7 +84,7 @@ export const deleteProfile = async (profileId: string) => {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("profile")
+  removeLocalStorageItemsByPrefix("Profiles")
 
   return true
 }

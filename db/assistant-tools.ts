@@ -1,24 +1,33 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert } from "@/supabase/types"
+import { removeLocalStorageItemsByPrefix } from "./deletcache"
+import { FetchDataWithCache } from "./fetchDataWithCache"
 
 export const getAssistantToolsByAssistantId = async (assistantId: string) => {
-  const { data: assistantTools, error } = await supabase
-    .from("assistants")
-    .select(
-      `
+  const fetchData = async () => {
+    const { data: assistantTools, error } = await supabase
+      .from("assistants")
+      .select(
+        `
         id, 
         name, 
         tools (*)
       `
-    )
-    .eq("id", assistantId)
-    .single()
+      )
+      .eq("id", assistantId)
+      .single()
 
-  if (!assistantTools) {
-    throw new Error(error.message)
+    if (!assistantTools) {
+      throw new Error(error.message)
+    }
+
+    return assistantTools
   }
-
-  return assistantTools
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(
+    `AssistantToolsByAssistantId-${assistantId}`,
+    fetchData
+  )
 }
 
 export const createAssistantTool = async (
@@ -32,6 +41,9 @@ export const createAssistantTool = async (
   if (!createdAssistantTool) {
     throw new Error(error.message)
   }
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("Assistant")
 
   return createdAssistantTool
 }
@@ -48,6 +60,9 @@ export const createAssistantTools = async (
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("Assistant")
+
   return createdAssistantTools
 }
 
@@ -62,6 +77,9 @@ export const deleteAssistantTool = async (
     .eq("tool_id", toolId)
 
   if (error) throw new Error(error.message)
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("Assistant")
 
   return true
 }

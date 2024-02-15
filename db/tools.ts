@@ -1,59 +1,75 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
 import { removeLocalStorageItemsByPrefix } from "./deletcache"
+import { FetchDataWithCache } from "./fetchDataWithCache"
 
 export const getToolById = async (toolId: string) => {
-  const { data: tool, error } = await supabase
-    .from("tools")
-    .select("*")
-    .eq("id", toolId)
-    .single()
+  const fetchData = async () => {
+    const { data: tool, error } = await supabase
+      .from("tools")
+      .select("*")
+      .eq("id", toolId)
+      .single()
 
-  if (!tool) {
-    throw new Error(error.message)
+    if (!tool) {
+      throw new Error(error.message)
+    }
+
+    return tool
   }
-
-  return tool
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(`ToolById-${toolId}`, fetchData)
 }
 
 export const getToolWorkspacesByWorkspaceId = async (workspaceId: string) => {
-  const { data: workspace, error } = await supabase
-    .from("workspaces")
-    .select(
-      `
+  const fetchData = async () => {
+    const { data: workspace, error } = await supabase
+      .from("workspaces")
+      .select(
+        `
       id,
       name,
       tools (*)
     `
-    )
-    .eq("id", workspaceId)
-    .single()
+      )
+      .eq("id", workspaceId)
+      .single()
 
-  if (!workspace) {
-    throw new Error(error.message)
+    if (!workspace) {
+      throw new Error(error.message)
+    }
+
+    return workspace
   }
-
-  return workspace
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(
+    `ToolWorkspacesByWorkspaceId-${workspaceId}`,
+    fetchData
+  )
 }
 
 export const getToolWorkspacesByToolId = async (toolId: string) => {
-  const { data: tool, error } = await supabase
-    .from("tools")
-    .select(
-      `
+  const fetchData = async () => {
+    const { data: tool, error } = await supabase
+      .from("tools")
+      .select(
+        `
       id, 
       name, 
       workspaces (*)
     `
-    )
-    .eq("id", toolId)
-    .single()
+      )
+      .eq("id", toolId)
+      .single()
 
-  if (!tool) {
-    throw new Error(error.message)
+    if (!tool) {
+      throw new Error(error.message)
+    }
+
+    return tool
   }
-
-  return tool
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(`ToolWorkspacesByToolId-${toolId}`, fetchData)
 }
 
 export const createTool = async (
@@ -77,7 +93,7 @@ export const createTool = async (
   })
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("toolData")
+  removeLocalStorageItemsByPrefix("Tool")
 
   return createdTool
 }
@@ -104,7 +120,7 @@ export const createTools = async (
   )
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("toolData")
+  removeLocalStorageItemsByPrefix("Tool")
 
   return createdTools
 }
@@ -125,7 +141,7 @@ export const createToolWorkspace = async (item: {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("toolData")
+  removeLocalStorageItemsByPrefix("Tool")
 
   return createdToolWorkspace
 }
@@ -141,7 +157,7 @@ export const createToolWorkspaces = async (
   if (error) throw new Error(error.message)
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("toolData")
+  removeLocalStorageItemsByPrefix("Tool")
 
   return createdToolWorkspaces
 }
@@ -162,7 +178,7 @@ export const updateTool = async (
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("toolData")
+  removeLocalStorageItemsByPrefix("Tool")
 
   return updatedTool
 }
@@ -175,7 +191,7 @@ export const deleteTool = async (toolId: string) => {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("toolData")
+  removeLocalStorageItemsByPrefix("Tool")
 
   return true
 }
@@ -193,7 +209,7 @@ export const deleteToolWorkspace = async (
   if (error) throw new Error(error.message)
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("toolData")
+  removeLocalStorageItemsByPrefix("Tool")
 
   return true
 }

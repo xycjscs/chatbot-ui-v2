@@ -1,59 +1,78 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
 import { removeLocalStorageItemsByPrefix } from "./deletcache"
+import { FetchDataWithCache } from "./fetchDataWithCache"
 
 export const getPresetById = async (presetId: string) => {
-  const { data: preset, error } = await supabase
-    .from("presets")
-    .select("*")
-    .eq("id", presetId)
-    .single()
+  const fetchData = async () => {
+    const { data: preset, error } = await supabase
+      .from("presets")
+      .select("*")
+      .eq("id", presetId)
+      .single()
 
-  if (!preset) {
-    throw new Error(error.message)
+    if (!preset) {
+      throw new Error(error.message)
+    }
+
+    return preset
   }
-
-  return preset
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(`PresetById-${presetId}`, fetchData)
 }
 
 export const getPresetWorkspacesByWorkspaceId = async (workspaceId: string) => {
-  const { data: workspace, error } = await supabase
-    .from("workspaces")
-    .select(
-      `
+  const fetchData = async () => {
+    const { data: workspace, error } = await supabase
+      .from("workspaces")
+      .select(
+        `
       id,
       name,
       presets (*)
     `
-    )
-    .eq("id", workspaceId)
-    .single()
+      )
+      .eq("id", workspaceId)
+      .single()
 
-  if (!workspace) {
-    throw new Error(error.message)
+    if (!workspace) {
+      throw new Error(error.message)
+    }
+
+    return workspace
   }
-
-  return workspace
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(
+    `PresetWorkspacesByWorkspaceId-${workspaceId}`,
+    fetchData
+  )
 }
 
 export const getPresetWorkspacesByPresetId = async (presetId: string) => {
-  const { data: preset, error } = await supabase
-    .from("presets")
-    .select(
-      `
+  const fetchData = async () => {
+    const { data: preset, error } = await supabase
+      .from("presets")
+      .select(
+        `
       id, 
       name, 
       workspaces (*)
     `
-    )
-    .eq("id", presetId)
-    .single()
+      )
+      .eq("id", presetId)
+      .single()
 
-  if (!preset) {
-    throw new Error(error.message)
+    if (!preset) {
+      throw new Error(error.message)
+    }
+
+    return preset
   }
-
-  return preset
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(
+    `PresetWorkspacesByPresetId-${presetId}`,
+    fetchData
+  )
 }
 
 export const createPreset = async (
@@ -77,7 +96,7 @@ export const createPreset = async (
   })
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("presetData")
+  removeLocalStorageItemsByPrefix("Preset")
 
   return createdPreset
 }
@@ -124,7 +143,7 @@ export const createPresetWorkspace = async (item: {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("presetData")
+  removeLocalStorageItemsByPrefix("Preset")
 
   return createdPresetWorkspace
 }
@@ -138,6 +157,9 @@ export const createPresetWorkspaces = async (
     .select("*")
 
   if (error) throw new Error(error.message)
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("Preset")
 
   return createdPresetWorkspaces
 }
@@ -158,7 +180,7 @@ export const updatePreset = async (
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("presetData")
+  removeLocalStorageItemsByPrefix("Preset")
 
   return updatedPreset
 }
@@ -171,7 +193,7 @@ export const deletePreset = async (presetId: string) => {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("presetData")
+  removeLocalStorageItemsByPrefix("Preset")
 
   return true
 }
@@ -189,7 +211,7 @@ export const deletePresetWorkspace = async (
   if (error) throw new Error(error.message)
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("presetData")
+  removeLocalStorageItemsByPrefix("Preset")
 
   return true
 }

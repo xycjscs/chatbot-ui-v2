@@ -4,59 +4,75 @@ import mammoth from "mammoth"
 import { toast } from "sonner"
 import { uploadFile } from "./storage/files"
 import { removeLocalStorageItemsByPrefix } from "./deletcache"
+import { FetchDataWithCache } from "./fetchDataWithCache"
 
 export const getFileById = async (fileId: string) => {
-  const { data: file, error } = await supabase
-    .from("files")
-    .select("*")
-    .eq("id", fileId)
-    .single()
+  const fetchData = async () => {
+    const { data: file, error } = await supabase
+      .from("files")
+      .select("*")
+      .eq("id", fileId)
+      .single()
 
-  if (!file) {
-    throw new Error(error.message)
+    if (!file) {
+      throw new Error(error.message)
+    }
+
+    return file
   }
-
-  return file
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(`FileById-${fileId}`, fetchData)
 }
 
 export const getFileWorkspacesByWorkspaceId = async (workspaceId: string) => {
-  const { data: workspace, error } = await supabase
-    .from("workspaces")
-    .select(
-      `
+  const fetchData = async () => {
+    const { data: workspace, error } = await supabase
+      .from("workspaces")
+      .select(
+        `
       id,
       name,
       files (*)
     `
-    )
-    .eq("id", workspaceId)
-    .single()
+      )
+      .eq("id", workspaceId)
+      .single()
 
-  if (!workspace) {
-    throw new Error(error.message)
+    if (!workspace) {
+      throw new Error(error.message)
+    }
+
+    return workspace
   }
-
-  return workspace
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(
+    `FileWorkspacesByWorkspaceId-${workspaceId}`,
+    fetchData
+  )
 }
 
 export const getFileWorkspacesByFileId = async (fileId: string) => {
-  const { data: file, error } = await supabase
-    .from("files")
-    .select(
-      `
+  const fetchData = async () => {
+    const { data: file, error } = await supabase
+      .from("files")
+      .select(
+        `
       id, 
       name, 
       workspaces (*)
     `
-    )
-    .eq("id", fileId)
-    .single()
+      )
+      .eq("id", fileId)
+      .single()
 
-  if (!file) {
-    throw new Error(error.message)
+    if (!file) {
+      throw new Error(error.message)
+    }
+
+    return file
   }
-
-  return file
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(`FileWorkspacesByFileId-${fileId}`, fetchData)
 }
 
 export const createFileBasedOnExtension = async (
@@ -74,7 +90,7 @@ export const createFileBasedOnExtension = async (
     })
 
     // 更新成功后，清除本地缓存
-    removeLocalStorageItemsByPrefix("fileData")
+    removeLocalStorageItemsByPrefix("File")
 
     return createDocXFile(
       result.value,
@@ -138,6 +154,9 @@ export const createFile = async (
 
   const fetchedFile = await getFileById(createdFile.id)
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("File")
+
   return fetchedFile
 }
 
@@ -196,7 +215,7 @@ export const createDocXFile = async (
   const fetchedFile = await getFileById(createdFile.id)
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("fileData")
+  removeLocalStorageItemsByPrefix("File")
 
   return fetchedFile
 }
@@ -222,7 +241,7 @@ export const createFiles = async (
     }))
   )
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("fileData")
+  removeLocalStorageItemsByPrefix("File")
 
   return createdFiles
 }
@@ -243,7 +262,7 @@ export const createFileWorkspace = async (item: {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("fileData")
+  removeLocalStorageItemsByPrefix("File")
 
   return createdFileWorkspace
 }
@@ -259,7 +278,7 @@ export const createFileWorkspaces = async (
   if (error) throw new Error(error.message)
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("fileData")
+  removeLocalStorageItemsByPrefix("File")
 
   return createdFileWorkspaces
 }
@@ -280,7 +299,7 @@ export const updateFile = async (
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("fileData")
+  removeLocalStorageItemsByPrefix("File")
 
   return updatedFile
 }
@@ -293,7 +312,7 @@ export const deleteFile = async (fileId: string) => {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("fileData")
+  removeLocalStorageItemsByPrefix("File")
 
   return true
 }
@@ -311,7 +330,7 @@ export const deleteFileWorkspace = async (
   if (error) throw new Error(error.message)
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("fileData")
+  removeLocalStorageItemsByPrefix("File")
 
   return true
 }

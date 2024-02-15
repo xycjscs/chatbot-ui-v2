@@ -1,59 +1,78 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
 import { removeLocalStorageItemsByPrefix } from "./deletcache"
+import { FetchDataWithCache } from "./fetchDataWithCache"
 
 export const getPromptById = async (promptId: string) => {
-  const { data: prompt, error } = await supabase
-    .from("prompts")
-    .select("*")
-    .eq("id", promptId)
-    .single()
+  const fetchData = async () => {
+    const { data: prompt, error } = await supabase
+      .from("prompts")
+      .select("*")
+      .eq("id", promptId)
+      .single()
 
-  if (!prompt) {
-    throw new Error(error.message)
+    if (!prompt) {
+      throw new Error(error.message)
+    }
+
+    return prompt
   }
-
-  return prompt
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(`PromptById-${promptId}`, fetchData)
 }
 
 export const getPromptWorkspacesByWorkspaceId = async (workspaceId: string) => {
-  const { data: workspace, error } = await supabase
-    .from("workspaces")
-    .select(
-      `
+  const fetchData = async () => {
+    const { data: workspace, error } = await supabase
+      .from("workspaces")
+      .select(
+        `
       id,
       name,
       prompts (*)
     `
-    )
-    .eq("id", workspaceId)
-    .single()
+      )
+      .eq("id", workspaceId)
+      .single()
 
-  if (!workspace) {
-    throw new Error(error.message)
+    if (!workspace) {
+      throw new Error(error.message)
+    }
+
+    return workspace
   }
-
-  return workspace
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(
+    `PromptWorkspacesByWorkspaceId-${workspaceId}`,
+    fetchData
+  )
 }
 
 export const getPromptWorkspacesByPromptId = async (promptId: string) => {
-  const { data: prompt, error } = await supabase
-    .from("prompts")
-    .select(
-      `
+  const fetchData = async () => {
+    const { data: prompt, error } = await supabase
+      .from("prompts")
+      .select(
+        `
       id, 
       name, 
       workspaces (*)
     `
-    )
-    .eq("id", promptId)
-    .single()
+      )
+      .eq("id", promptId)
+      .single()
 
-  if (!prompt) {
-    throw new Error(error.message)
+    if (!prompt) {
+      throw new Error(error.message)
+    }
+
+    return prompt
   }
-
-  return prompt
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(
+    `PromptWorkspacesByPromptId-${promptId}`,
+    fetchData
+  )
 }
 
 export const createPrompt = async (
@@ -77,7 +96,7 @@ export const createPrompt = async (
   })
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("promptData")
+  removeLocalStorageItemsByPrefix("Prompt")
 
   return createdPrompt
 }
@@ -104,7 +123,7 @@ export const createPrompts = async (
   )
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("promptData")
+  removeLocalStorageItemsByPrefix("Prompt")
 
   return createdPrompts
 }
@@ -125,7 +144,7 @@ export const createPromptWorkspace = async (item: {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("promptData")
+  removeLocalStorageItemsByPrefix("Prompt")
 
   return createdPromptWorkspace
 }
@@ -159,7 +178,7 @@ export const updatePrompt = async (
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("promptData")
+  removeLocalStorageItemsByPrefix("Prompt")
 
   return updatedPrompt
 }
@@ -172,7 +191,7 @@ export const deletePrompt = async (promptId: string) => {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("promptData")
+  removeLocalStorageItemsByPrefix("Prompt")
 
   return true
 }
@@ -190,7 +209,7 @@ export const deletePromptWorkspace = async (
   if (error) throw new Error(error.message)
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("promptData")
+  removeLocalStorageItemsByPrefix("Prompt")
 
   return true
 }

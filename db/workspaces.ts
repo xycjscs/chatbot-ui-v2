@@ -1,48 +1,61 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
 import { removeLocalStorageItemsByPrefix } from "./deletcache"
+import { FetchDataWithCache } from "./fetchDataWithCache"
 
 export const getHomeWorkspaceByUserId = async (userId: string) => {
-  const { data: homeWorkspace, error } = await supabase
-    .from("workspaces")
-    .select("*")
-    .eq("user_id", userId)
-    .eq("is_home", true)
-    .single()
+  const fetchData = async () => {
+    const { data: homeWorkspace, error } = await supabase
+      .from("workspaces")
+      .select("*")
+      .eq("user_id", userId)
+      .eq("is_home", true)
+      .single()
 
-  if (!homeWorkspace) {
-    throw new Error(error.message)
+    if (!homeWorkspace) {
+      throw new Error(error.message)
+    }
+
+    return homeWorkspace.id
   }
-
-  return homeWorkspace.id
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(`HomeWorkspaceByUserId-${userId}`, fetchData)
 }
 
 export const getWorkspaceById = async (workspaceId: string) => {
-  const { data: workspace, error } = await supabase
-    .from("workspaces")
-    .select("*")
-    .eq("id", workspaceId)
-    .single()
+  const fetchData = async () => {
+    const { data: workspace, error } = await supabase
+      .from("workspaces")
+      .select("*")
+      .eq("id", workspaceId)
+      .single()
 
-  if (!workspace) {
-    throw new Error(error.message)
+    if (!workspace) {
+      throw new Error(error.message)
+    }
+
+    return workspace
   }
-
-  return workspace
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(`WorkspaceById-${workspaceId}`, fetchData)
 }
 
 export const getWorkspacesByUserId = async (userId: string) => {
-  const { data: workspaces, error } = await supabase
-    .from("workspaces")
-    .select("*")
-    .eq("user_id", userId)
-    .order("created_at", { ascending: false })
+  const fetchData = async () => {
+    const { data: workspaces, error } = await supabase
+      .from("workspaces")
+      .select("*")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false })
 
-  if (!workspaces) {
-    throw new Error(error.message)
+    if (!workspaces) {
+      throw new Error(error.message)
+    }
+
+    return workspaces
   }
-
-  return workspaces
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(`WorkspacesByUserId-${userId}`, fetchData)
 }
 
 export const createWorkspace = async (
@@ -59,7 +72,7 @@ export const createWorkspace = async (
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("workspaces")
+  removeLocalStorageItemsByPrefix("Workspace")
 
   return createdWorkspace
 }
@@ -80,7 +93,7 @@ export const updateWorkspace = async (
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("workspaces")
+  removeLocalStorageItemsByPrefix("Workspace")
 
   return updatedWorkspace
 }
@@ -96,7 +109,7 @@ export const deleteWorkspace = async (workspaceId: string) => {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("workspaces")
+  removeLocalStorageItemsByPrefix("Workspace")
 
   return true
 }

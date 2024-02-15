@@ -1,18 +1,26 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
 import { removeLocalStorageItemsByPrefix } from "./deletcache"
+import { FetchDataWithCache } from "./fetchDataWithCache"
 
 export const getFoldersByWorkspaceId = async (workspaceId: string) => {
-  const { data: folders, error } = await supabase
-    .from("folders")
-    .select("*")
-    .eq("workspace_id", workspaceId)
+  const fetchData = async () => {
+    const { data: folders, error } = await supabase
+      .from("folders")
+      .select("*")
+      .eq("workspace_id", workspaceId)
 
-  if (!folders) {
-    throw new Error(error.message)
+    if (!folders) {
+      throw new Error(error.message)
+    }
+
+    return folders
   }
-
-  return folders
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(
+    `FoldersByWorkspaceId-${workspaceId}`,
+    fetchData
+  )
 }
 
 export const createFolder = async (folder: TablesInsert<"folders">) => {
@@ -27,7 +35,7 @@ export const createFolder = async (folder: TablesInsert<"folders">) => {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("folders")
+  removeLocalStorageItemsByPrefix("Folders")
 
   return createdFolder
 }
@@ -48,7 +56,7 @@ export const updateFolder = async (
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("folders")
+  removeLocalStorageItemsByPrefix("Folders")
 
   return updatedFolder
 }
@@ -61,7 +69,7 @@ export const deleteFolder = async (folderId: string) => {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("folders")
+  removeLocalStorageItemsByPrefix("Folders")
 
   return true
 }

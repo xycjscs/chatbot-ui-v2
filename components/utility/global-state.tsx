@@ -28,8 +28,6 @@ import { VALID_ENV_KEYS } from "@/types/valid-keys"
 import { useRouter } from "next/navigation"
 import { FC, useEffect, useState } from "react"
 
-import { FetchDataWithCache } from "@/db/fetchDataWithCache"
-
 interface GlobalStateProps {
   children: React.ReactNode
 }
@@ -160,18 +158,14 @@ export const GlobalState: FC<GlobalStateProps> = ({ children }) => {
     if (session) {
       const user = session.user
 
-      const profile = await FetchDataWithCache(`profile-${user.id}`, () =>
-        getProfileByUserId(user.id)
-      )
+      const profile = await getProfileByUserId(user.id)
       setProfile(profile)
 
       if (!profile.has_onboarded) {
         return router.push("/setup")
       }
 
-      const workspaces = await FetchDataWithCache(`workspaces-${user.id}`, () =>
-        getWorkspacesByUserId(user.id)
-      )
+      const workspaces = await getWorkspacesByUserId(user.id)
       setWorkspaces(workspaces)
 
       for (const workspace of workspaces) {

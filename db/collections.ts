@@ -1,63 +1,82 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
 import { removeLocalStorageItemsByPrefix } from "./deletcache"
+import { FetchDataWithCache } from "./fetchDataWithCache"
 
 export const getCollectionById = async (collectionId: string) => {
-  const { data: collection, error } = await supabase
-    .from("collections")
-    .select("*")
-    .eq("id", collectionId)
-    .single()
+  const fetchData = async () => {
+    const { data: collection, error } = await supabase
+      .from("collections")
+      .select("*")
+      .eq("id", collectionId)
+      .single()
 
-  if (!collection) {
-    throw new Error(error.message)
+    if (!collection) {
+      throw new Error(error.message)
+    }
+
+    return collection
   }
-
-  return collection
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(`CollectionById-${collectionId}`, fetchData)
 }
 
 export const getCollectionWorkspacesByWorkspaceId = async (
   workspaceId: string
 ) => {
-  const { data: workspace, error } = await supabase
-    .from("workspaces")
-    .select(
-      `
+  const fetchData = async () => {
+    const { data: workspace, error } = await supabase
+      .from("workspaces")
+      .select(
+        `
       id,
       name,
       collections (*)
     `
-    )
-    .eq("id", workspaceId)
-    .single()
+      )
+      .eq("id", workspaceId)
+      .single()
 
-  if (!workspace) {
-    throw new Error(error.message)
+    if (!workspace) {
+      throw new Error(error.message)
+    }
+
+    return workspace
   }
-
-  return workspace
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(
+    `CollectionWorkspacesByWorkspaceId-${workspaceId}`,
+    fetchData
+  )
 }
 
 export const getCollectionWorkspacesByCollectionId = async (
   collectionId: string
 ) => {
-  const { data: collection, error } = await supabase
-    .from("collections")
-    .select(
-      `
+  const fetchData = async () => {
+    const { data: collection, error } = await supabase
+      .from("collections")
+      .select(
+        `
       id, 
       name, 
       workspaces (*)
     `
-    )
-    .eq("id", collectionId)
-    .single()
+      )
+      .eq("id", collectionId)
+      .single()
 
-  if (!collection) {
-    throw new Error(error.message)
+    if (!collection) {
+      throw new Error(error.message)
+    }
+
+    return collection
   }
-
-  return collection
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(
+    `CollectionWorkspacesByCollectionId-${collectionId}`,
+    fetchData
+  )
 }
 
 export const createCollection = async (
@@ -81,7 +100,7 @@ export const createCollection = async (
   })
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("collections")
+  removeLocalStorageItemsByPrefix("Collection")
 
   return createdCollection
 }
@@ -108,7 +127,7 @@ export const createCollections = async (
   )
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("collections")
+  removeLocalStorageItemsByPrefix("Collection")
 
   return createdCollections
 }
@@ -129,7 +148,7 @@ export const createCollectionWorkspace = async (item: {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("collections")
+  removeLocalStorageItemsByPrefix("Collection")
 
   return createdCollectionWorkspace
 }
@@ -145,7 +164,7 @@ export const createCollectionWorkspaces = async (
   if (error) throw new Error(error.message)
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("collections")
+  removeLocalStorageItemsByPrefix("Collection")
 
   return createdCollectionWorkspaces
 }
@@ -166,7 +185,7 @@ export const updateCollection = async (
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("collections")
+  removeLocalStorageItemsByPrefix("Collection")
 
   return updatedCollection
 }
@@ -182,7 +201,7 @@ export const deleteCollection = async (collectionId: string) => {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("collections")
+  removeLocalStorageItemsByPrefix("Collection")
 
   return true
 }
@@ -200,7 +219,7 @@ export const deleteCollectionWorkspace = async (
   if (error) throw new Error(error.message)
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("collections")
+  removeLocalStorageItemsByPrefix("Collection")
 
   return true
 }

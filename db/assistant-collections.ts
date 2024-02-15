@@ -1,26 +1,35 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert } from "@/supabase/types"
+import { removeLocalStorageItemsByPrefix } from "./deletcache"
+import { FetchDataWithCache } from "./fetchDataWithCache"
 
 export const getAssistantCollectionsByAssistantId = async (
   assistantId: string
 ) => {
-  const { data: assistantCollections, error } = await supabase
-    .from("assistants")
-    .select(
-      `
+  const fetchData = async () => {
+    const { data: assistantCollections, error } = await supabase
+      .from("assistants")
+      .select(
+        `
         id, 
         name, 
         collections (*)
       `
-    )
-    .eq("id", assistantId)
-    .single()
+      )
+      .eq("id", assistantId)
+      .single()
 
-  if (!assistantCollections) {
-    throw new Error(error.message)
+    if (!assistantCollections) {
+      throw new Error(error.message)
+    }
+
+    return assistantCollections
   }
-
-  return assistantCollections
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(
+    `AssistantCollectionsByAssistantId-${assistantId}`,
+    fetchData
+  )
 }
 
 export const createAssistantCollection = async (
@@ -34,6 +43,8 @@ export const createAssistantCollection = async (
   if (!createdAssistantCollection) {
     throw new Error(error.message)
   }
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("AssistantCollection")
 
   return createdAssistantCollection
 }
@@ -50,6 +61,9 @@ export const createAssistantCollections = async (
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("AssistantCollection")
+
   return createdAssistantCollections
 }
 
@@ -64,6 +78,9 @@ export const deleteAssistantCollection = async (
     .eq("collection_id", collectionId)
 
   if (error) throw new Error(error.message)
+
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("AssistantCollection")
 
   return true
 }

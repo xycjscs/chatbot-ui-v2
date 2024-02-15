@@ -1,63 +1,82 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
 import { removeLocalStorageItemsByPrefix } from "./deletcache"
+import { FetchDataWithCache } from "./fetchDataWithCache"
 
 export const getAssistantById = async (assistantId: string) => {
-  const { data: assistant, error } = await supabase
-    .from("assistants")
-    .select("*")
-    .eq("id", assistantId)
-    .single()
+  const fetchData = async () => {
+    const { data: assistant, error } = await supabase
+      .from("assistants")
+      .select("*")
+      .eq("id", assistantId)
+      .single()
 
-  if (!assistant) {
-    throw new Error(error.message)
+    if (!assistant) {
+      throw new Error(error.message)
+    }
+
+    return assistant
   }
-
-  return assistant
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(`AssistantById-${assistantId}`, fetchData)
 }
 
 export const getAssistantWorkspacesByWorkspaceId = async (
   workspaceId: string
 ) => {
-  const { data: workspace, error } = await supabase
-    .from("workspaces")
-    .select(
-      `
+  const fetchData = async () => {
+    const { data: workspace, error } = await supabase
+      .from("workspaces")
+      .select(
+        `
       id,
       name,
       assistants (*)
     `
-    )
-    .eq("id", workspaceId)
-    .single()
+      )
+      .eq("id", workspaceId)
+      .single()
 
-  if (!workspace) {
-    throw new Error(error.message)
+    if (!workspace) {
+      throw new Error(error.message)
+    }
+
+    return workspace
   }
-
-  return workspace
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(
+    `AssistantWorkspacesByWorkspaceId-${workspaceId}`,
+    fetchData
+  )
 }
 
 export const getAssistantWorkspacesByAssistantId = async (
   assistantId: string
 ) => {
-  const { data: assistant, error } = await supabase
-    .from("assistants")
-    .select(
-      `
+  const fetchData = async () => {
+    const { data: assistant, error } = await supabase
+      .from("assistants")
+      .select(
+        `
       id, 
       name, 
       workspaces (*)
     `
-    )
-    .eq("id", assistantId)
-    .single()
+      )
+      .eq("id", assistantId)
+      .single()
 
-  if (!assistant) {
-    throw new Error(error.message)
+    if (!assistant) {
+      throw new Error(error.message)
+    }
+
+    return assistant
   }
-
-  return assistant
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(
+    `AssistantWorkspacesByAssistantId-${assistantId}`,
+    fetchData
+  )
 }
 
 export const createAssistant = async (
@@ -81,7 +100,7 @@ export const createAssistant = async (
   })
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("assistant")
+  removeLocalStorageItemsByPrefix("Assistant")
 
   return createdAssistant
 }
@@ -108,7 +127,7 @@ export const createAssistants = async (
   )
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("assistant")
+  removeLocalStorageItemsByPrefix("Assistant")
 
   return createdAssistants
 }
@@ -129,7 +148,7 @@ export const createAssistantWorkspace = async (item: {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("assistant")
+  removeLocalStorageItemsByPrefix("Assistant")
 
   return createdAssistantWorkspace
 }
@@ -145,7 +164,7 @@ export const createAssistantWorkspaces = async (
   if (error) throw new Error(error.message)
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("assistant")
+  removeLocalStorageItemsByPrefix("Assistant")
 
   return createdAssistantWorkspaces
 }
@@ -165,6 +184,9 @@ export const updateAssistant = async (
     throw new Error(error.message)
   }
 
+  // 更新成功后，清除本地缓存
+  removeLocalStorageItemsByPrefix("Assistant")
+
   return updatedAssistant
 }
 
@@ -179,7 +201,7 @@ export const deleteAssistant = async (assistantId: string) => {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("assistant")
+  removeLocalStorageItemsByPrefix("Assistant")
 
   return true
 }
@@ -197,7 +219,7 @@ export const deleteAssistantWorkspace = async (
   if (error) throw new Error(error.message)
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("assistant")
+  removeLocalStorageItemsByPrefix("Assistant")
 
   return true
 }

@@ -1,59 +1,78 @@
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesInsert, TablesUpdate } from "@/supabase/types"
 import { removeLocalStorageItemsByPrefix } from "./deletcache"
+import { FetchDataWithCache } from "./fetchDataWithCache"
 
 export const getModelById = async (modelId: string) => {
-  const { data: model, error } = await supabase
-    .from("models")
-    .select("*")
-    .eq("id", modelId)
-    .single()
+  const fetchData = async () => {
+    const { data: model, error } = await supabase
+      .from("models")
+      .select("*")
+      .eq("id", modelId)
+      .single()
 
-  if (!model) {
-    throw new Error(error.message)
+    if (!model) {
+      throw new Error(error.message)
+    }
+
+    return model
   }
-
-  return model
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(`ModelById-${modelId}`, fetchData)
 }
 
 export const getModelWorkspacesByWorkspaceId = async (workspaceId: string) => {
-  const { data: workspace, error } = await supabase
-    .from("workspaces")
-    .select(
-      `
+  const fetchData = async () => {
+    const { data: workspace, error } = await supabase
+      .from("workspaces")
+      .select(
+        `
       id,
       name,
       models (*)
     `
-    )
-    .eq("id", workspaceId)
-    .single()
+      )
+      .eq("id", workspaceId)
+      .single()
 
-  if (!workspace) {
-    throw new Error(error.message)
+    if (!workspace) {
+      throw new Error(error.message)
+    }
+
+    return workspace
   }
-
-  return workspace
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(
+    `ModelWorkspacesByWorkspaceId-${workspaceId}`,
+    fetchData
+  )
 }
 
 export const getModelWorkspacesByModelId = async (modelId: string) => {
-  const { data: model, error } = await supabase
-    .from("models")
-    .select(
-      `
+  const fetchData = async () => {
+    const { data: model, error } = await supabase
+      .from("models")
+      .select(
+        `
       id, 
       name, 
       workspaces (*)
     `
-    )
-    .eq("id", modelId)
-    .single()
+      )
+      .eq("id", modelId)
+      .single()
 
-  if (!model) {
-    throw new Error(error.message)
+    if (!model) {
+      throw new Error(error.message)
+    }
+
+    return model
   }
-
-  return model
+  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
+  return await FetchDataWithCache(
+    `ModelWorkspacesByModelId-${modelId}`,
+    fetchData
+  )
 }
 
 export const createModel = async (
@@ -77,7 +96,7 @@ export const createModel = async (
   })
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("modelData")
+  removeLocalStorageItemsByPrefix("Model")
 
   return createdModel
 }
@@ -104,7 +123,7 @@ export const createModels = async (
   )
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("modelData")
+  removeLocalStorageItemsByPrefix("Model")
 
   return createdModels
 }
@@ -125,7 +144,7 @@ export const createModelWorkspace = async (item: {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("modelData")
+  removeLocalStorageItemsByPrefix("Model")
 
   return createdModelWorkspace
 }
@@ -141,7 +160,7 @@ export const createModelWorkspaces = async (
   if (error) throw new Error(error.message)
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("modelData")
+  removeLocalStorageItemsByPrefix("Model")
 
   return createdModelWorkspaces
 }
@@ -162,7 +181,7 @@ export const updateModel = async (
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("modelData")
+  removeLocalStorageItemsByPrefix("Model")
 
   return updatedModel
 }
@@ -175,7 +194,7 @@ export const deleteModel = async (modelId: string) => {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("modelData")
+  removeLocalStorageItemsByPrefix("Model")
 
   return true
 }
@@ -193,7 +212,7 @@ export const deleteModelWorkspace = async (
   if (error) throw new Error(error.message)
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("modelData")
+  removeLocalStorageItemsByPrefix("Model")
 
   return true
 }
