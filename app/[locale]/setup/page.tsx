@@ -150,6 +150,7 @@ export default function SetupPage() {
     setSelectedWorkspace(homeWorkspace!)
     setWorkspaces(workspaces)
 
+    localStorage.clear()
     return router.push(`/${homeWorkspace?.id}/chat`)
   }
 
