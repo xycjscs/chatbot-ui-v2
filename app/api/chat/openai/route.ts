@@ -32,12 +32,36 @@ export async function POST(request: Request) {
 
       const cleanedMessage = latestMessage.replace("生成图片", "").trim()
 
+      // 定义默认的imageSize值
+      let imageSize:
+        | "1024x1024"
+        | "1792x1024"
+        | "1024x1792"
+        | null
+        | undefined = "1024x1024"
+
+      // 检查cleanedMessage是否包含特定的关键字以调整图片尺寸
+      if (cleanedMessage.includes("横") || cleanedMessage.includes("水平")) {
+        imageSize = "1792x1024"
+      } else if (cleanedMessage.includes("竖")) {
+        imageSize = "1024x1792"
+      }
+
+      // 默认的质量值
+      let imagequality: "hd" | "standard" | null | undefined = "standard"
+
+      // 检查cleanedMessage是否包含特定的关键字以调整图片质量
+      if (cleanedMessage.includes("质量")) {
+        imagequality = "hd"
+      }
+
       // Todo CHO20240112: Get those image generation parameters from the UI settings
       const response = await openai.images.generate({
         model: "dall-e-3",
         prompt: cleanedMessage,
         n: 1,
-        size: "1024x1024"
+        quality: imagequality,
+        size: imageSize
       })
 
       return new Response(
