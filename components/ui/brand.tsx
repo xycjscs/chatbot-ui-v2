@@ -10,7 +10,9 @@ interface BrandProps {
 
 export const Brand: FC<BrandProps> = ({ theme = "dark" }) => {
   return (
-    <div className="flex justify-center text-4xl font-bold tracking-wide text-[rgb(255,215,0)]">
+    <div
+      className="flex justify-center text-4xl font-bold tracking-wide text-[rgb(0,0,0)]" //节日接口
+    >
       MIML
     </div>
   )

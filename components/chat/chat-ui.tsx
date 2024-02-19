@@ -208,7 +208,8 @@ export const ChatUI: FC<ChatUIProps> = ({}) => {
       </div>
 
       <div
-        className="flex size-full flex-col overflow-auto border-b bg-[url('/dragon.png')] bg-cover bg-fixed bg-center"
+        className="flex size-full flex-col overflow-auto border-b"
+        //className="flex size-full flex-col overflow-auto border-b bg-[url('/dragon.png')] bg-cover bg-fixed bg-center" 节日接口
         onScroll={handleScroll}
       >
         <div ref={messagesStartRef} />

@@ -188,7 +188,7 @@ export const Message: FC<MessageProps> = ({
     <div
       className={cn(
         "flex w-full justify-center",
-        message.role === "user" ? "" : "bg-white bg-opacity-15" //"bg-secondary"
+        message.role === "user" ? "" : "bg-secondary" //"bg-white bg-opacity-15" 节日接口
       )}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
