@@ -11,7 +11,8 @@ interface MessageMarkdownProps {
 export const MessageMarkdown: FC<MessageMarkdownProps> = ({ content }) => {
   return (
     <MessageMarkdownMemoized
-      className=" prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 min-w-full space-y-6 break-words text-[rgb(0,0,0)]"
+      className=" prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 min-w-full space-y-6 break-words"
+      //className=" prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 min-w-full space-y-6 break-words text-[rgb(0,0,0)]" 节日接口
       remarkPlugins={[remarkGfm, remarkMath]}
       components={{
         p({ children }) {
