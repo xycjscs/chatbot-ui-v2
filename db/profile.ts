@@ -50,7 +50,7 @@ export const createProfile = async (profile: TablesInsert<"profiles">) => {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("Profiles")
+  removeLocalStorageItemsByPrefix("Profile")
 
   return createdProfile
 }
@@ -71,7 +71,7 @@ export const updateProfile = async (
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("Profiles")
+  removeLocalStorageItemsByPrefix("Profile")
 
   return updatedProfile
 }
@@ -84,7 +84,7 @@ export const deleteProfile = async (profileId: string) => {
   }
 
   // 更新成功后，清除本地缓存
-  removeLocalStorageItemsByPrefix("Profiles")
+  removeLocalStorageItemsByPrefix("Profile")
 
   return true
 }
