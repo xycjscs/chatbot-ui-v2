@@ -4,38 +4,30 @@ import { removeLocalStorageItemsByPrefix } from "./deletcache"
 import { FetchDataWithCache } from "./fetchDataWithCache"
 
 export const getProfileByUserId = async (userId: string) => {
-  const fetchData = async () => {
-    const { data: profile, error } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("user_id", userId)
-      .single()
+  const { data: profile, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("user_id", userId)
+    .single()
 
-    if (!profile) {
-      throw new Error(error.message)
-    }
-
-    return profile
+  if (!profile) {
+    throw new Error(error.message)
   }
-  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
-  return await FetchDataWithCache(`ProfileByUserId-${userId}`, fetchData)
+
+  return profile
 }
 
 export const getProfilesByUserId = async (userId: string) => {
-  const fetchData = async () => {
-    const { data: profiles, error } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("user_id", userId)
+  const { data: profiles, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("user_id", userId)
 
-    if (!profiles) {
-      throw new Error(error.message)
-    }
-
-    return profiles
+  if (!profiles) {
+    throw new Error(error.message)
   }
-  // Use the FetchDataWithCache function to get workspace data, either from cache or the server
-  return await FetchDataWithCache(`ProfilesByUserId-${userId}`, fetchData)
+
+  return profiles
 }
 
 export const createProfile = async (profile: TablesInsert<"profiles">) => {
