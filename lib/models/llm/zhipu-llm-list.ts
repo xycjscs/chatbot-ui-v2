@@ -34,4 +34,4 @@ const GLM_3_TURBO: LLM = {
   imageInput: false
 }
 
-export const ZHIPU_LLM_LIST: LLM[] = [GLM_4, GLM_3_TURBO]
+export const ZHIPU_LLM_LIST: LLM[] = [GLM_4]

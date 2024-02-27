@@ -19,6 +19,7 @@ export type OpenAILLMID =
   | "gpt-4" // GPT-4
   | "gpt-3.5-turbo" // Updated GPT-3.5 Turbo
   | "gpt-3.5-turbo-0125"
+  | "gpt-3.5-turbo-16k-0613"
 
 // Google Models
 export type GoogleLLMID =
@@ -35,6 +36,7 @@ export type MistralLLMID =
   | "mistral-tiny" // Mistral Tiny
   | "mistral-small" // Mistral Small
   | "mistral-medium" // Mistral Medium
+  | "mistral-large-latest" // Mistral large
 
 // Perplexity Models (UPDATED 1/31/24)
 export type PerplexityLLMID =
@@ -49,7 +51,10 @@ export type PerplexityLLMID =
   | "codellama-70b-instruct" // CodeLlama 70B Instruct
 
 // Yi Models
-export type YiLLMID = "yi-34b-chat" // Yi 34B
+export type YiLLMID =
+  | "yi-34b-chat" // Yi 34B
+  | "yi-34b-chat-200k" // Yi 34B 200k
+  | "yi-34b-chat-0205" // Yi 34B 0205
 
 // deepseek Models
 export type DeepseekLLMID =

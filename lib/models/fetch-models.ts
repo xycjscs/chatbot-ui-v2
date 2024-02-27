@@ -7,13 +7,13 @@ export const fetchHostedModels = async (profile: Tables<"profiles">) => {
   try {
     const providers = [
       "openai",
+      "yi",
       "zhipu",
       "google",
       "azure",
       "anthropic",
       "mistral",
       "perplexity",
-      "yi",
       "deepseek"
       //这里用来模型排序
     ]
