@@ -145,12 +145,12 @@ export const ModelSelect: FC<ModelSelectProps> = ({
         <Input
           ref={inputRef}
           className="w-full"
-          placeholder="Search models..."
+          placeholder="搜索100+模型..."
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
 
-        <div className="max-h-[300px] overflow-auto">
+        <div className="scrollbar-visible max-h-[300px] overflow-auto">
           {Object.entries(groupedModels).map(([provider, models]) => {
             const filteredModels = models
               .filter(model => {

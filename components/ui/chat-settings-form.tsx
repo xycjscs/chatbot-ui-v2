@@ -37,6 +37,8 @@ export const ChatSettingsForm: FC<ChatSettingsFormProps> = ({
 
   if (!profile) return null
 
+  console.log(chatSettings)
+
   return (
     <div className="space-y-3">
       <div className="space-y-1">
