@@ -1114,6 +1114,7 @@ export interface Database {
           created_at: string
           display_name: string
           google_gemini_api_key: string | null
+          groq_api_key: string | null
           has_onboarded: boolean
           id: string
           image_path: string
@@ -1141,6 +1142,7 @@ export interface Database {
           created_at?: string
           display_name: string
           google_gemini_api_key?: string | null
+          groq_api_key?: string | null
           has_onboarded?: boolean
           id?: string
           image_path: string
@@ -1168,6 +1170,7 @@ export interface Database {
           created_at?: string
           display_name?: string
           google_gemini_api_key?: string | null
+          groq_api_key?: string | null
           has_onboarded?: boolean
           id?: string
           image_path?: string

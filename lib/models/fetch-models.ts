@@ -8,6 +8,8 @@ export const fetchHostedModels = async (profile: Tables<"profiles">) => {
     const providers = [
       "openai",
       "zhipu",
+      "agent",
+      "yi",
       "google",
       "azure",
       "anthropic",

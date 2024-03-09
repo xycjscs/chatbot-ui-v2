@@ -9,6 +9,7 @@ export type LLMID =
   | YiLLMID
   | DeepseekLLMID
   | ZhipuLLMID
+  | AgentLLMID
 
 // OpenAI Models (UPDATED 1/29/24)
 export type OpenAILLMID =
@@ -74,3 +75,8 @@ export type ZhipuLLMID =
   | "glm-4" // GLM-4
   | "glm-4v" // GLM-4 Vision
   | "glm-3-turbo" // GLM-3 Turbo
+
+// OpenAI Models (UPDATED 1/29/24)
+export type AgentLLMID =
+  | "Code-Interpreter" // 集成Code Interpreter基础功能
+  | "Zhouyi" // 集成算命功能

@@ -10,3 +10,4 @@ export type ModelProvider =
   | "openrouter"
   | "custom"
   | "zhipu"
+  | "agent"

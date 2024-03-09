@@ -691,10 +691,10 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
 
               <div className="space-y-1">
                 {envKeyMap["openrouter"] ? (
-                  <Label>90+大模型超大杯 API Key set by admin.</Label>
+                  <Label>100+大模型超大杯 API Key set by admin.</Label>
                 ) : (
                   <>
-                    <Label>90+大模型超大杯 API Key</Label>
+                    <Label>100+大模型超大杯 API Key</Label>
                     <Input
                       placeholder="大模型超大杯 API Key 公众号赞赏等额充值额度"
                       type="password"
