@@ -5,6 +5,7 @@ export type LLMID =
   | GoogleLLMID
   | AnthropicLLMID
   | MistralLLMID
+  | GroqLLMID
   | PerplexityLLMID
   | YiLLMID
   | DeepseekLLMID
@@ -30,6 +31,8 @@ export type GoogleLLMID =
 export type AnthropicLLMID =
   | "claude-2.1" // Claude 2
   | "claude-instant-1.2" // Claude Instant
+  | "claude-3-sonnet-20240229" // Claude 3 Sonnet
+  | "claude-3-opus-20240229" // Claude 3 Opus
 
 // Mistral Models
 export type MistralLLMID =
@@ -37,6 +40,10 @@ export type MistralLLMID =
   | "mistral-small" // Mistral Small
   | "mistral-medium" // Mistral Medium
   | "mistral-large-latest" // Mistral large
+
+export type GroqLLMID =
+  | "llama2-70b-4096" // LLaMA2-70b
+  | "mixtral-8x7b-32768" // Mixtral-8x7b
 
 // Perplexity Models (UPDATED 1/31/24)
 export type PerplexityLLMID =
@@ -49,6 +56,10 @@ export type PerplexityLLMID =
   | "llama-2-70b-chat" // Llama2 70B Chat
   | "codellama-34b-instruct" // CodeLlama 34B Instruct
   | "codellama-70b-instruct" // CodeLlama 70B Instruct
+  | "sonar-small-chat" // Sonar Small Chat
+  | "sonar-small-online" // Sonar Small Online
+  | "sonar-medium-chat" // Sonar Medium Chat
+  | "sonar-medium-online" // Sonar Medium Online
 
 // Yi Models
 export type YiLLMID =

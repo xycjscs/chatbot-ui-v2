@@ -3,6 +3,7 @@ import mistral from "@/public/providers/mistral.png"
 import deepseek from "@/public/providers/deepseek.webp"
 import ai01 from "@/public/providers/01ai.png"
 import meta from "@/public/providers/meta.png"
+import groq from "@/public/providers/groq.png"
 import perplexity from "@/public/providers/perplexity.png"
 import { ModelProvider } from "@/types"
 import { IconSparkles } from "@tabler/icons-react"
@@ -66,6 +67,19 @@ export const ModelIcon: FC<ModelIconProps> = ({
           )}
           src={mistral.src}
           alt="Mistral"
+          width={width}
+          height={height}
+        />
+      )
+    case "groq":
+      return (
+        <Image
+          className={cn(
+            "rounded-sm p-0",
+            theme === "dark" ? "bg-white" : "border-[1px] border-black"
+          )}
+          src={groq.src}
+          alt="Groq"
           width={width}
           height={height}
         />
