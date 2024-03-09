@@ -15,7 +15,6 @@ export const fetchHostedModels = async (profile: Tables<"profiles">) => {
       "anthropic",
       "mistral",
       "perplexity",
-      "yi",
       "deepseek"
       //这里用来模型排序
     ]

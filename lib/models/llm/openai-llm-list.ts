@@ -45,6 +45,16 @@ const GPT3_5Turbo: LLM = {
 }
 
 // GPT-3.5 Turbo (UPDATED 12/18/23)
+const GPT3_5Turbo_0613_16k: LLM = {
+  modelId: "gpt-3.5-turbo-16k-0613",
+  modelName: "GPT-3.5 Turbo Smart",
+  provider: "openai",
+  hostedId: "gpt-3.5-turbo-16k-0613",
+  platformLink: OPENAI_PLATORM_LINK,
+  imageInput: false
+}
+
+// GPT-3.5 Turbo (UPDATED 12/18/23)
 const GPT3_5Turbo_0613: LLM = {
   modelId: "gpt-3.5-turbo-0613",
   modelName: "GPT-3.5 Turbo 0613",
@@ -57,7 +67,7 @@ const GPT3_5Turbo_0613: LLM = {
 // GPT-3.5 Turbo (UPDATED 1/25/24)
 const GPT3_5Turbo_0125: LLM = {
   modelId: "gpt-3.5-turbo-0125",
-  modelName: "GPT-3.5 Turbo 0125",
+  modelName: "GPT-3.5 Turbo New",
   provider: "openai",
   hostedId: "gpt-3.5-turbo-0125",
   platformLink: OPENAI_PLATORM_LINK,
@@ -65,8 +75,4 @@ const GPT3_5Turbo_0125: LLM = {
 }
 
 //export const OPENAI_LLM_LIST: LLM[] = [GPT3_5Turbo, GPT4Turbo, GPT4Vision]
-export const OPENAI_LLM_LIST: LLM[] = [
-  GPT3_5Turbo_0125,
-  GPT3_5Turbo_0613,
-  GPT3_5Turbo
-]
+export const OPENAI_LLM_LIST: LLM[] = [GPT3_5Turbo_0125, GPT3_5Turbo_0613_16k]
