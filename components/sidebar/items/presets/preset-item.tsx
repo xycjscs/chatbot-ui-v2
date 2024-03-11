@@ -43,6 +43,7 @@ export const PresetItem: FC<PresetItemProps> = ({ preset }) => {
       icon={
         <ModelIcon
           provider={modelDetails?.provider || "custom"}
+          model={modelDetails?.modelId || "gpt-3.5-turbo"}
           height={30}
           width={30}
         />

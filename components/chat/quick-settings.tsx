@@ -202,6 +202,7 @@ export const QuickSettings: FC<QuickSettingsProps> = ({}) => {
           {selectedPreset && (
             <ModelIcon
               provider={modelDetails?.provider || "custom"}
+              model={modelDetails?.modelId || "gpt-3.5-turbo"}
               width={32}
               height={32}
             />

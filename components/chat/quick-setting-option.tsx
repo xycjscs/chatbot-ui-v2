@@ -41,6 +41,7 @@ export const QuickSettingOption: FC<QuickSettingOptionProps> = ({
         {contentType === "presets" ? (
           <ModelIcon
             provider={modelDetails?.provider || "custom"}
+            model={modelDetails?.modelId || "gpt-3.5-turbo"}
             width={32}
             height={32}
           />
