@@ -11,9 +11,10 @@ export const runtime: ServerRuntime = "edge"
 
 export async function POST(request: Request) {
   const json = await request.json()
-  const { chatSettings, messages } = json as {
+  const { chatSettings, messages, threadId } = json as {
     chatSettings: ChatSettings
     messages: any[]
+    threadId: string | null
   }
 
   // 定义默认的imageSize值
@@ -32,8 +33,10 @@ export async function POST(request: Request) {
 
   try {
     // Create a thread if needed
-    //const threadId = input.threadId ?? (await openai.beta.threads.create({})).id;
-
+    console.log(threadId)
+    // Create a thread if needed
+    let updatethreadId: string | null = threadId ?? "threadId-test-new"
+    console.log(updatethreadId)
     // Add a message to the thread
     //const createdMessage = await openai.beta.threads.messages.create(threadId, {
     //  role: 'user',
@@ -56,9 +59,21 @@ export async function POST(request: Request) {
       stream: true
     })
 
-    const stream = OpenAIStream(response)
+    //const stream = OpenAIStream(response)
 
-    return new StreamingTextResponse(stream)
+    //responseText是包装好了的回复。
+    const responseText = "test123456798"
+
+    const abc = new ReadableStream({
+      start(controller) {
+        controller.enqueue(responseText)
+        controller.close()
+      }
+    })
+
+    return new StreamingTextResponse(abc, {
+      headers: updatethreadId ? { "x-thread-id": updatethreadId } : undefined
+    })
   } catch (error: any) {
     let errorMessage = error.message || "An unexpected error occurred"
     const errorCode = error.status || 500

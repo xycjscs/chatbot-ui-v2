@@ -184,7 +184,7 @@ export const handleLocalChat = async (
   //console.log(formattedMessages)
 
   return await processResponse(
-    response,
+    response.response,
     isRegeneration
       ? payload.chatMessages[payload.chatMessages.length - 1]
       : tempAssistantMessage,
@@ -233,6 +233,7 @@ export const handleHostedChat = async (
   const requestBody = {
     chatSettings: payload.chatSettings,
     messages: formattedMessages,
+    //threadId: "threadId-test-old",
     customModelId: provider === "custom" ? modelData.hostedId : ""
   }
   //console.log(requestBody)
@@ -246,7 +247,7 @@ export const handleHostedChat = async (
   )
 
   return await processResponse(
-    response,
+    response.response,
     isRegeneration
       ? payload.chatMessages[payload.chatMessages.length - 1]
       : tempAssistantChatMessage,
@@ -287,7 +288,9 @@ export const fetchChatResponse = async (
     setChatMessages(prevMessages => prevMessages.slice(0, -2))
   }
 
-  return response
+  const threadId = response.headers.get("x-thread-id") // 从响应头中获取 threadId
+
+  return { response, threadId }
 }
 
 export const processResponse = async (

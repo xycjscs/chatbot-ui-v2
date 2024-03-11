@@ -95,8 +95,6 @@ export async function POST(request: Request) {
         baseURL: process.env.OPENAI_PROXY || "https://api.openai.com/v1"
       })
 
-      console.log(profile.openai_api_key)
-
       const response = await openai.chat.completions.create({
         model: chatSettings.model as ChatCompletionCreateParamsBase["model"],
         messages: messages as ChatCompletionCreateParamsBase["messages"],
