@@ -237,6 +237,7 @@ export const Message: FC<MessageProps> = ({
                     trigger={
                       <ModelIcon
                         provider={modelDetails?.provider || "custom"}
+                        model={modelDetails?.modelId || "gpt-3.5-turbo"}
                         height={ICON_SIZE}
                         width={ICON_SIZE}
                       />

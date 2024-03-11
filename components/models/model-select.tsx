@@ -110,6 +110,7 @@ export const ModelSelect: FC<ModelSelectProps> = ({
                 <>
                   <ModelIcon
                     provider={selectedModel?.provider}
+                    model={selectedModel?.modelId || "gpt-3.5-turbo"}
                     width={26}
                     height={26}
                   />

@@ -5,11 +5,11 @@ import ai01 from "@/public/providers/01ai.png"
 import meta from "@/public/providers/meta.png"
 import groq from "@/public/providers/groq.png"
 import perplexity from "@/public/providers/perplexity.png"
-import { ModelProvider } from "@/types"
+import { ModelProvider, LLMID } from "@/types"
 import { IconSparkles } from "@tabler/icons-react"
 import { useTheme } from "next-themes"
 import Image from "next/image"
-import { FC, HTMLAttributes } from "react"
+import { FC, HTMLAttributes, useContext } from "react"
 import { AnthropicSVG } from "../icons/anthropic-svg"
 import { GoogleSVG } from "../icons/google-svg"
 import { OpenAISVG } from "../icons/openai-svg"
@@ -18,20 +18,39 @@ import ollama from "@/public/providers/ollama.png"
 import { OllamaSVG } from "../icons/ollama-svg"
 import { OpenrouterSVG } from "../icons/openrouter-svg"
 import agent from "@/public/favicon.png"
+import { AndrewSVG } from "../icons/andrew-svg"
 
 interface ModelIconProps extends HTMLAttributes<HTMLDivElement> {
   provider: ModelProvider
+  model: LLMID
   height: number
   width: number
 }
 
 export const ModelIcon: FC<ModelIconProps> = ({
   provider,
+  model,
   height,
   width,
   ...props
 }) => {
   const { theme } = useTheme()
+
+  if (model) {
+    if (model.includes("claude-3")) {
+      return (
+        <AndrewSVG
+          className={cn(
+            "rounded-sm bg-[#fff] p-0.5 text-black",
+            props.className,
+            theme === "dark" ? "bg-white" : "border-[1px] border-black"
+          )}
+          width={width}
+          height={height}
+        />
+      )
+    }
+  }
 
   switch (provider as ModelProvider) {
     case "openai":

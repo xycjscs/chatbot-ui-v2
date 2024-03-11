@@ -2,9 +2,10 @@ import { LLM_LIST } from "@/lib/models/llm/llm-list"
 import { Tables } from "@/supabase/types"
 import { IconCircleCheckFilled, IconRobotFace } from "@tabler/icons-react"
 import Image from "next/image"
-import { FC } from "react"
+import { FC, useContext } from "react"
 import { ModelIcon } from "../models/model-icon"
 import { DropdownMenuItem } from "../ui/dropdown-menu"
+import { ChatbotUIContext } from "@/context/context"
 
 interface QuickSettingOptionProps {
   contentType: "presets" | "assistants"
@@ -21,7 +22,14 @@ export const QuickSettingOption: FC<QuickSettingOptionProps> = ({
   onSelect,
   image
 }) => {
-  const modelDetails = LLM_LIST.find(model => model.modelId === item.model)
+  const { availableLocalModels, availableOpenRouterModels } =
+    useContext(ChatbotUIContext)
+
+  const modelDetails = [
+    ...LLM_LIST,
+    ...availableLocalModels,
+    ...availableOpenRouterModels
+  ].find(model => model.modelId === item.model)
 
   return (
     <DropdownMenuItem
@@ -33,6 +41,7 @@ export const QuickSettingOption: FC<QuickSettingOptionProps> = ({
         {contentType === "presets" ? (
           <ModelIcon
             provider={modelDetails?.provider || "custom"}
+            model={modelDetails?.modelId || "gpt-3.5-turbo"}
             width={32}
             height={32}
           />

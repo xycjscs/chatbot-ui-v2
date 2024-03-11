@@ -42,7 +42,9 @@ export const QuickSettings: FC<QuickSettingsProps> = ({}) => {
     setChatFiles,
     setSelectedTools,
     setShowFilesDisplay,
-    selectedWorkspace
+    selectedWorkspace,
+    availableLocalModels,
+    availableOpenRouterModels
   } = useContext(ChatbotUIContext)
 
   const inputRef = useRef<HTMLInputElement>(null)
@@ -178,9 +180,11 @@ export const QuickSettings: FC<QuickSettingsProps> = ({}) => {
         image => image.path === selectedAssistant?.image_path
       )?.base64 || ""
 
-  const modelDetails = LLM_LIST.find(
-    model => model.modelId === selectedPreset?.model
-  )
+  const modelDetails = [
+    ...LLM_LIST,
+    ...availableLocalModels,
+    ...availableOpenRouterModels
+  ].find(model => model.modelId === selectedPreset?.model)
 
   return (
     <DropdownMenu
@@ -198,6 +202,7 @@ export const QuickSettings: FC<QuickSettingsProps> = ({}) => {
           {selectedPreset && (
             <ModelIcon
               provider={modelDetails?.provider || "custom"}
+              model={modelDetails?.modelId || "gpt-3.5-turbo"}
               width={32}
               height={32}
             />

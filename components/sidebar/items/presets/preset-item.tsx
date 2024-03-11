@@ -5,8 +5,9 @@ import { Label } from "@/components/ui/label"
 import { PRESET_NAME_MAX } from "@/db/limits"
 import { LLM_LIST } from "@/lib/models/llm/llm-list"
 import { Tables } from "@/supabase/types"
-import { FC, useState } from "react"
+import { FC, useState, useContext } from "react"
 import { SidebarItem } from "../all/sidebar-display-item"
+import { ChatbotUIContext } from "@/context/context"
 
 interface PresetItemProps {
   preset: Tables<"presets">
@@ -25,7 +26,14 @@ export const PresetItem: FC<PresetItemProps> = ({ preset }) => {
     includeWorkspaceInstructions: preset.include_workspace_instructions
   })
 
-  const modelDetails = LLM_LIST.find(model => model.modelId === preset.model)
+  const { availableLocalModels, availableOpenRouterModels } =
+    useContext(ChatbotUIContext)
+
+  const modelDetails = [
+    ...LLM_LIST,
+    ...availableLocalModels,
+    ...availableOpenRouterModels
+  ].find(model => model.modelId === preset.model)
 
   return (
     <SidebarItem
@@ -35,6 +43,7 @@ export const PresetItem: FC<PresetItemProps> = ({ preset }) => {
       icon={
         <ModelIcon
           provider={modelDetails?.provider || "custom"}
+          model={modelDetails?.modelId || "gpt-3.5-turbo"}
           height={30}
           width={30}
         />
