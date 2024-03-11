@@ -334,7 +334,7 @@ export const processResponse = async (
               const updatedChatMessage: ChatMessage = {
                 message: {
                   ...chatMessage.message,
-                  content: chatMessage.message.content + contentToAdd
+                  content: fullText //chatMessage.message.content + contentToAdd
                 },
                 fileItems: chatMessage.fileItems
               }
