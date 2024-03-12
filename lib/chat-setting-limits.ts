@@ -161,7 +161,7 @@ export const CHAT_SETTING_LIMITS: Record<LLMID, ChatSettingLimits> = {
   "yi-34b-chat": {
     MIN_TEMPERATURE: 0.0,
     MAX_TEMPERATURE: 1.99,
-    MAX_TOKEN_OUTPUT_LENGTH: 4096,
+    MAX_TOKEN_OUTPUT_LENGTH: 1024,
     MAX_CONTEXT_LENGTH: 4096
   },
 
@@ -169,7 +169,7 @@ export const CHAT_SETTING_LIMITS: Record<LLMID, ChatSettingLimits> = {
   "yi-34b-chat-0205": {
     MIN_TEMPERATURE: 0.0,
     MAX_TEMPERATURE: 1.99,
-    MAX_TOKEN_OUTPUT_LENGTH: 4096,
+    MAX_TOKEN_OUTPUT_LENGTH: 1024,
     MAX_CONTEXT_LENGTH: 4096
   },
 
