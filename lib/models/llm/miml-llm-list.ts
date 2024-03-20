@@ -23,4 +23,22 @@ const qwen_15_14: LLM = {
   imageInput: false
 }
 
-export const Miml_LLM_LIST: LLM[] = [qwen_15_14]
+const gemma: LLM = {
+  modelId: "gemma",
+  modelName: "谷歌Gemma",
+  provider: "miml",
+  hostedId: "gemma",
+  platformLink: Yi_PLATORM_LINK,
+  imageInput: false
+}
+
+const neural: LLM = {
+  modelId: "neural",
+  modelName: "英特尔Neural",
+  provider: "miml",
+  hostedId: "neural",
+  platformLink: Yi_PLATORM_LINK,
+  imageInput: false
+}
+
+export const Miml_LLM_LIST: LLM[] = [qwen_15_14, gemma, neural]

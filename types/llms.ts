@@ -97,3 +97,5 @@ export type ZhipuLLMID =
 export type MIMLLLMID =
   | "llava-vision" //
   | "通义千问14B" //
+  | "gemma"
+  | "neural"
