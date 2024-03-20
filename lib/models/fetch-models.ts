@@ -7,6 +7,7 @@ export const fetchHostedModels = async (profile: Tables<"profiles">) => {
   try {
     const providers = [
       "openai",
+      "miml",
       "yi",
       "google",
       "azure",

@@ -17,6 +17,7 @@ import zhipu from "@/public/providers/zhipu.png"
 import ollama from "@/public/providers/ollama.png"
 import { OllamaSVG } from "../icons/ollama-svg"
 import { OpenrouterSVG } from "../icons/openrouter-svg"
+import miml from "@/public/favicon.png"
 import { AndrewSVG } from "../icons/andrew-svg"
 
 import { ChatbotUIContext } from "@/context/context"
@@ -164,6 +165,19 @@ export const ModelIcon: FC<ModelIconProps> = ({
           )}
           src={deepseek.src}
           alt="Deepseek"
+          width={width}
+          height={height}
+        />
+      )
+    case "miml":
+      return (
+        <Image
+          className={cn(
+            "rounded-sm",
+            theme === "dark" ? "bg-white" : "border-[1px] border-black"
+          )}
+          src={miml.src}
+          alt="yi"
           width={width}
           height={height}
         />

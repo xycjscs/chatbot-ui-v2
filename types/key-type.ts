@@ -9,3 +9,4 @@ export type EnvKey =
   | "DEEPSEEK_API_KEY"
   | "YI_API_KEY"
   | "ZHIPU_API_KEY"
+  | "MIML_API_KEY"
