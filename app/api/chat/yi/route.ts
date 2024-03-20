@@ -16,8 +16,6 @@ export async function POST(request: Request) {
   }
 
   try {
-    const profile = await getServerProfile()
-
     const openai = new OpenAI({
       apiKey: process.env.YI_API_KEY,
       baseURL: "https://api.lingyiwanwu.com/v1"

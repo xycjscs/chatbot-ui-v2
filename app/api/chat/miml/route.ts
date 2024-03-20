@@ -16,8 +16,6 @@ export async function POST(request: Request) {
   }
 
   try {
-    const profile = await getServerProfile()
-
     const openai = new OpenAI({
       apiKey: "miml",
       baseURL: process.env.NEXT_PUBLIC_OLLAMA_URL + "/v1" //"https://www.deepgalaxy.cn:7788/v1"
