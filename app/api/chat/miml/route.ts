@@ -20,8 +20,10 @@ export async function POST(request: Request) {
 
     const openai = new OpenAI({
       apiKey: "miml",
-      baseURL: "https://www.deepgalaxy.cn:7788/v1"
+      baseURL: process.env.NEXT_PUBLIC_OLLAMA_URL + "/v1" //"https://www.deepgalaxy.cn:7788/v1"
     })
+
+    console.log(messages)
 
     const response = await openai.chat.completions.create({
       model: chatSettings.model as ChatCompletionCreateParamsBase["model"],
