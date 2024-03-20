@@ -20,7 +20,7 @@ export async function POST(request: Request) {
 
     const openai = new OpenAI({
       apiKey: process.env.YI_API_KEY,
-      baseURL: "https://api.01ww.xyz/v1"
+      baseURL: "https://api.lingyiwanwu.com/v1"
     })
 
     const response = await openai.chat.completions.create({
