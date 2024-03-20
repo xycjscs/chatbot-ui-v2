@@ -23,9 +23,16 @@ export async function POST(request: Request) {
       baseURL: "https://api.lingyiwanwu.com/v1"
     })
 
+    //vl 模型不支持system prompt
+    let filteredMessages = messages
+    if (chatSettings.model.includes("vl")) {
+      filteredMessages = messages.filter(message => message.role !== "system")
+    }
+    console.log(filteredMessages)
+
     const response = await openai.chat.completions.create({
       model: chatSettings.model as ChatCompletionCreateParamsBase["model"],
-      messages: messages as ChatCompletionCreateParamsBase["messages"],
+      messages: filteredMessages as ChatCompletionCreateParamsBase["messages"],
       temperature: chatSettings.temperature,
       max_tokens:
         CHAT_SETTING_LIMITS[chatSettings.model].MAX_TOKEN_OUTPUT_LENGTH,

@@ -32,4 +32,13 @@ const Yi_34B_0205: LLM = {
   imageInput: false
 }
 
-export const Yi_LLM_LIST: LLM[] = [Yi_34B_200k, Yi_34B_0205]
+const Yi_vl: LLM = {
+  modelId: "yi-vl-plus",
+  modelName: "Yi 视觉模型",
+  provider: "yi",
+  hostedId: "yi-vl-plus",
+  platformLink: Yi_PLATORM_LINK,
+  imageInput: true
+}
+
+export const Yi_LLM_LIST: LLM[] = [Yi_34B_0205, Yi_34B_200k, Yi_vl]

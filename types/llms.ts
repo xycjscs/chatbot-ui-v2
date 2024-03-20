@@ -66,6 +66,7 @@ export type YiLLMID =
   | "yi-34b-chat" // Yi 34B
   | "yi-34b-chat-200k" // Yi 34B 200k
   | "yi-34b-chat-0205" // Yi 34B 0205
+  | "yi-vl-plus" //视觉模型
 
 // deepseek Models
 export type DeepseekLLMID =

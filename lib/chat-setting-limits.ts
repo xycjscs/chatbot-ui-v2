@@ -181,6 +181,13 @@ export const CHAT_SETTING_LIMITS: Record<LLMID, ChatSettingLimits> = {
     MAX_CONTEXT_LENGTH: 200000
   },
 
+  "yi-vl-plus": {
+    MIN_TEMPERATURE: 0.0,
+    MAX_TEMPERATURE: 1.99,
+    MAX_TOKEN_OUTPUT_LENGTH: 1024,
+    MAX_CONTEXT_LENGTH: 4096
+  },
+
   // deepseek MODELS
   "deepseek-coder": {
     MIN_TEMPERATURE: 0.0,
