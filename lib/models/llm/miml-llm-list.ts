@@ -6,39 +6,39 @@ const Yi_PLATORM_LINK = "https://www.lingyiwanwu.com"
 
 // Yi 34B (UPDATED 01/13/24)
 const llava_16_34: LLM = {
-  modelId: "llava-vision",
-  modelName: "LLAVA视觉模型",
+  modelId: "Yi视觉模型llava",
+  modelName: "Yi视觉模型",
   provider: "miml",
-  hostedId: "llava-vision",
+  hostedId: "Yi视觉模型llava",
   platformLink: Yi_PLATORM_LINK,
   imageInput: true
 }
 
 const qwen_15_14: LLM = {
-  modelId: "通义千问14B",
+  modelId: "通义千问32K",
   modelName: "通义千问-32K",
   provider: "miml",
-  hostedId: "通义千问14B",
+  hostedId: "通义千问32K",
   platformLink: Yi_PLATORM_LINK,
   imageInput: false
 }
 
 const gemma: LLM = {
-  modelId: "gemma",
+  modelId: "谷歌Gemma",
   modelName: "谷歌Gemma",
   provider: "miml",
-  hostedId: "gemma",
+  hostedId: "谷歌Gemma",
   platformLink: Yi_PLATORM_LINK,
   imageInput: false
 }
 
 const neural: LLM = {
-  modelId: "neural",
+  modelId: "英特尔Neural",
   modelName: "英特尔Neural",
   provider: "miml",
-  hostedId: "neural",
+  hostedId: "英特尔Neural",
   platformLink: Yi_PLATORM_LINK,
   imageInput: false
 }
 
-export const Miml_LLM_LIST: LLM[] = [qwen_15_14, gemma, neural]
+export const Miml_LLM_LIST: LLM[] = [qwen_15_14, gemma, neural, llava_16_34]

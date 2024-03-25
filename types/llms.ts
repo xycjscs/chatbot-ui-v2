@@ -95,7 +95,7 @@ export type ZhipuLLMID =
 
 // Yi Models
 export type MIMLLLMID =
-  | "llava-vision" //
-  | "通义千问14B" //
-  | "gemma"
-  | "neural"
+  | "Yi视觉模型llava" //
+  | "通义千问32K"
+  | "谷歌Gemma"
+  | "英特尔Neural"
