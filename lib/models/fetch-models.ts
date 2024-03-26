@@ -124,7 +124,10 @@ export const fetchOpenRouterModels = async () => {
         provider: "openrouter",
         hostedId: model.name,
         platformLink: "https://openrouter.dev",
-        imageInput: model.id.includes("vision") || model.id.includes("视觉"),
+        imageInput:
+          model.id.includes("vision") ||
+          model.id.includes("视觉") ||
+          model.id.includes("claude-3"),
         maxContext: model.context_length
       })
     )
