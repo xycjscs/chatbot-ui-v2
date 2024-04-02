@@ -11,6 +11,7 @@ export type LLMID =
   | DeepseekLLMID
   | ZhipuLLMID
   | MIMLLLMID
+  | openrouterpublicLLMID
 
 // OpenAI Models (UPDATED 1/29/24)
 export type OpenAILLMID =
@@ -99,3 +100,6 @@ export type MIMLLLMID =
   | "通义千问14B" //
   | "gemma"
   | "neural"
+
+// openrouter Models
+export type openrouterpublicLLMID = "anthropic/claude-3-haiku:beta" //

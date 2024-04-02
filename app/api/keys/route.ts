@@ -16,6 +16,7 @@ export async function GET() {
     yi: VALID_ENV_KEYS.YI_API_KEY,
     deepseek: VALID_ENV_KEYS.DEEPSEEK_API_KEY,
     miml: VALID_ENV_KEYS.MIML_API_KEY,
+    openrouterpublic: VALID_ENV_KEYS.OPENROUTERPUBLIC_API_KEY,
 
     openai_organization_id: VALID_ENV_KEYS.OPENAI_ORGANIZATION_ID,
 

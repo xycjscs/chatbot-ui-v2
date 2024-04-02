@@ -12,3 +12,4 @@ export type ModelProvider =
   | "custom"
   | "zhipu"
   | "miml"
+  | "openrouterpublic"

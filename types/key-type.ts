@@ -10,3 +10,4 @@ export type EnvKey =
   | "YI_API_KEY"
   | "ZHIPU_API_KEY"
   | "MIML_API_KEY"
+  | "OPENROUTERPUBLIC_API_KEY"

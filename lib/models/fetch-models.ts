@@ -6,6 +6,7 @@ import { LLM_LIST_MAP } from "./llm/llm-list"
 export const fetchHostedModels = async (profile: Tables<"profiles">) => {
   try {
     const providers = [
+      "openrouterpublic",
       "openai",
       //"miml",
       "yi",
