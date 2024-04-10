@@ -24,6 +24,21 @@ export default function HomePage() {
         Start Chatting
         <IconArrowRight className="ml-1" size={20} />
       </Link>
+
+      <a
+        href="https://miml.org"
+        className="mt-2 text-xl font-bold"
+        style={{
+          color: "white",
+          padding: "8px 16px",
+          borderRadius: "5px",
+          background: "lightgreen",
+          textDecoration: "none",
+          display: "inline-block"
+        }}
+      >
+        点击访问 MIML2.0平台
+      </a>
     </div>
   )
 }
