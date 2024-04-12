@@ -32,7 +32,7 @@ export default function HomePage() {
           color: "white",
           padding: "8px 16px",
           borderRadius: "5px",
-          background: "lightgreen",
+          background: "green",
           textDecoration: "none",
           display: "inline-block"
         }}
